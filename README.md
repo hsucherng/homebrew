@@ -19,7 +19,7 @@ This particular branch uses [Metalsmith](http://metalsmith.io) with the followin
 2. Make a copy of the *homebrew* folder.
 3. Open up the CLI (command-line interface, e.g. cmd.exe) and `cd` into the fresh copy of the *homebrew* folder.
 4. Run `npm install`. This should install all the required dependencies.
-5. Run `node build` to build the site, which should compile into a new *build* folder. Alternatively, run `node serve` to build the site *and* serve it up on localhost (port 8080 by default).
+5. Run `node build` to build the site, which should compile into a new *build* folder. Alternatively, run `node build --serve` to build the site *and* serve it up on localhost (port 8080 by default).
 
 No LiveReload / BrowserSync, so make sure Metalsmith is properly watching & rebuilding the changes before reloading the page.
 
