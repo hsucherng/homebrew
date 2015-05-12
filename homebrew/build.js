@@ -18,15 +18,15 @@ var Metalsmith   = require('metalsmith'),
      *
      * condFn({
      *     flag: '--serve',
-     *     callback: function() {
+     *     callback: (function() {
      *         return serve();
-     *     }
+     *     })()
      * })
      */
     condFn = function(config) {
         return function(files, metalsmith, done) {
             if(process.argv.indexOf(config.flag) > -1) {
-                config.callback().call(null, files, metalsmith, done);
+                config.callback.call(null, files, metalsmith, done);
             } else {
                 done();
             }
@@ -68,7 +68,7 @@ Metalsmith(__dirname)
     /* --serve */
     .use(condFn({
         flag: '--serve',
-        callback: function() {
+        callback: (function() {
             return watch({
                 paths: {
                     "${source}/**/*": true,
@@ -76,13 +76,13 @@ Metalsmith(__dirname)
                     "templates/**/*": "**/*.html"
                 }
             });
-        }
+        })()
     }))
     .use(condFn({
         flag: '--serve',
-        callback: function() {
+        callback: (function() {
             return serve();
-        }
+        })
     }))
 
     /* END! */
