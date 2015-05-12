@@ -82,7 +82,7 @@ Metalsmith(__dirname)
         flag: '--serve',
         callback: (function() {
             return serve();
-        })
+        })()
     }))
 
     /* END! */
