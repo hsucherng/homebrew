@@ -89,5 +89,7 @@ Metalsmith(__dirname)
     .build(function(err, files) {
         if(err) {
             console.log(err);
+        } else {
+            console.log('Build complete!');
         }
     });
