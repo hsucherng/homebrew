@@ -39,7 +39,7 @@ Current workaround is to run `node build` so that a more detailed error log is s
 
 Current work around is to re-run the `node serve` command again. On Windows, you can press *CTRL + C* to shutdown the currently running localhost, so that you can re-run the `node serve` command again.
 
-**Template partials need to be manually registered inside `build.js` and `serve.js`.**
+**Template partials need to be manually registered inside `build.js`.**
 
 Not sure how to automate it yet. Might need a plugin like metalsmith-partial, although I'm not sure how that works yet.
 
