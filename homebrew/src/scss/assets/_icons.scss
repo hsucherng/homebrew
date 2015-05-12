@@ -1,0 +1,89 @@
+/*-----------------------------------------------------------------------------
+    Icons
+-----------------------------------------------------------------------------*/
+
+.icon {
+    display: inline-block;
+    vertical-align: middle;
+}
+
+/*
+ * Checkbox/Radio button icons.
+ *
+ * Markup as follows:
+ *
+ *      <label>
+ *          <input type="checkbox">
+ *          <i class="icon  icon--input"></i>
+ *          Click me to tick the checkbox.
+ *      </label>
+ */
+
+.icon--input {
+    width: 20px;
+    height: 20px;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    background-color: #fff;
+    position: relative;
+    top: -1px;
+    transition: none 0.25s cubic-bezier(0.19, 1, 0.22, 1);
+    transition-property: background-color, border-color;
+}
+input[disabled] + .icon--input {
+    background-color: #eee;
+}
+.is-valid + .icon--input {
+    border-color: #5cb21d;
+}
+.is-invalid + .icon--input {
+    border-color: #ff8201;
+}
+
+input[type="radio"] + .icon--input {
+    border-radius: 50%;
+}
+    input[type="checkbox"] + .icon--input:after,
+    input[type="checkbox"] + .icon--input:before,
+    input[type="radio"] + .icon--input:after {
+        content: '';
+        background-color: #000;
+        position: absolute;
+        opacity: 0;
+        transition: opacity 0.25s cubic-bezier(0.19, 1, 0.22, 1);
+    }
+    input[type="checkbox"] + .icon--input:after,
+    input[type="checkbox"] + .icon--input:before {
+        height: 3px;
+    }
+    input[type="checkbox"] + .icon--input:before {
+        content: '';
+        width: 6px;
+        border-radius: 3px 0 0 3px;
+        top: 10px;
+        left: 3px;
+        transform: rotate(45deg);
+    }
+    input[type="checkbox"] + .icon--input:after {
+        content: '';
+        width: 10px;
+        border-radius: 0 3px 3px 0;
+        top: 8px;
+        left: 6px;
+        transform: rotate(-45deg);
+    }
+    input[type="checkbox"]:checked + .icon--input:after,
+    input[type="checkbox"]:checked + .icon--input:before {
+        opacity: 1;
+    }
+    input[type="radio"] + .icon--input:after {
+        width: 6px;
+        height: 6px;
+        margin: -3px 0 0 -3px;
+        border-radius: 50%;
+        top: 50%;
+        left: 50%;
+    }
+    input[type="radio"]:checked + .icon--input:after {
+        opacity: 1;
+    }

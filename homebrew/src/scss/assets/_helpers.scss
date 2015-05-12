@@ -1,0 +1,15 @@
+/*-----------------------------------------------------------------------------
+	Helpers
+-----------------------------------------------------------------------------*/
+
+.hidden-accessible {
+    width: 0;
+    height: 0;
+    position: absolute;
+    clip: rect(0,0,0,0);
+	opacity: 0; 
+}
+
+.cant-transition {
+    transition: none !important;
+}

@@ -1,0 +1,50 @@
+/*-----------------------------------------------------------------------------
+    [Website Name]
+-----------------------------------------------------------------------------*/
+
+
+/*---- Imports ----*/
+
+
+@import 'imports/normalize';
+@import 'imports/fonts';
+
+
+/*---- Globals ----*/
+
+
+@import 'globals/vars';
+@import 'globals/mixins';
+@import 'globals/starters';
+
+
+/*---- Homebrew ----*/
+
+
+@import 'assets/homebrew/homebrew.carousels';
+@import 'assets/homebrew/homebrew.dropdowns';
+@import 'assets/homebrew/homebrew.popups';
+@import 'assets/homebrew/homebrew.tooltips';
+@import 'assets/homebrew/homebrew.validations';
+
+
+/*---- Assets ----*/
+
+
+@import 'assets/buttons';
+@import 'assets/icons';
+@import 'assets/forms';
+
+
+/*---- Main ----*/
+
+
+@import 'main/general';
+@import 'main/header';
+@import 'main/footer';
+
+
+/*---- Priority Assets ----*/
+
+
+@import 'assets/helpers';
