@@ -8,7 +8,6 @@ This particular branch uses [Metalsmith](http://metalsmith.io) with the followin
 
 - [Autoprefixer](https://github.com/postcss/autoprefixer)
 - [Concat](https://github.com/aymericbeaumet/metalsmith-concat)
-- [CleanCSS](https://github.com/jakubpawlowicz/clean-css)
 - [Handlebars](http://handlebarsjs.com/)
 - [SASS](http://sass-lang.com/)
 - [Uglify](https://github.com/ksmithut/metalsmith-uglify)

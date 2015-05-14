@@ -15,7 +15,6 @@
     "lodash.omit": "^2.4.1",
     "metalsmith": "^1.7.0",
     "metalsmith-autoprefixer": "^1.0.2",
-    "metalsmith-clean-css": "^2.0.0",
     "metalsmith-concat": "^2.0.0",
     "metalsmith-sass": "^0.7.0",
     "metalsmith-serve": "0.0.3",

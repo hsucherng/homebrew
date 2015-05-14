@@ -1,6 +1,5 @@
 var Metalsmith   = require('metalsmith'),
     autoprefixer = require('metalsmith-autoprefixer'),
-    cleanCSS     = require('metalsmith-clean-css'),
     concat       = require('metalsmith-concat'),
     fs           = require('fs'),
     handlebars   = require('handlebars'),
@@ -41,11 +40,10 @@ Metalsmith(__dirname)
 
     /* CSS */
     .use(sass({
-        outputStyle: "expanded",
+        outputStyle: "compressed",
         outputDir: "css/"
     }))
     .use(autoprefixer())
-    .use(cleanCSS())
 
     /* JS */
     .use(concat({
