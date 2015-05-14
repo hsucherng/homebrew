@@ -7,7 +7,6 @@ A personal boilerplate for myself. Has a couple of variations, e.g. vanilla CSS 
 This particular branch uses [Metalsmith](http://metalsmith.io) with the following plugins setup:
 
 - [Autoprefixer](https://github.com/postcss/autoprefixer)
-- [Concat](https://github.com/aymericbeaumet/metalsmith-concat)
 - [Handlebars](http://handlebarsjs.com/)
 - [SASS](http://sass-lang.com/)
 - [Uglify](https://github.com/ksmithut/metalsmith-uglify)

@@ -1,6 +1,5 @@
 var Metalsmith   = require('metalsmith'),
     autoprefixer = require('metalsmith-autoprefixer'),
-    concat       = require('metalsmith-concat'),
     fs           = require('fs'),
     handlebars   = require('handlebars'),
     sass         = require('metalsmith-sass'),
@@ -46,10 +45,6 @@ Metalsmith(__dirname)
     .use(autoprefixer())
 
     /* JS */
-    .use(concat({
-        files: 'js/plugins/homebrew/*.js',
-        output: 'js/plugins/homebrew.js'
-    }))
     .use(uglify({
         filter: function(filepath) {
             if(filepath.substr(filepath.length-3) == '.js') {
