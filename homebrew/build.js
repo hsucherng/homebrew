@@ -33,6 +33,8 @@ var Metalsmith   = require('metalsmith'),
 
 handlebars.registerPartial('samplePartial', fs.readFileSync(__dirname + '/templates/partials/sample-partial.html').toString());
 
+console.log('Building...');
+
 Metalsmith(__dirname)
     .source('src')
     .destination('build')
