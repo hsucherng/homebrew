@@ -29,7 +29,7 @@ This is still a rather new, immature workflow, so there are a couple of hiccups 
 
 Current workaround is to re-run the `node serve` command again. On Windows, you can press *CTRL + C* to shutdown the currently running localhost, so that you can re-run the `node serve` command again.
 
-**No detailed error logging while running `node serve`.**
+**SASS errors don't seem to be properly logged while running `node serve`.**
 
 Current workaround is to run `node build` so that a more detailed error log is shown in the CLI, then fix the issue from there.
 
@@ -40,6 +40,14 @@ Current work around is to re-run the `node serve` command again. On Windows, you
 **Template partials need to be manually registered inside `build.js`.**
 
 Not sure how to automate it yet. Might need a plugin like metalsmith-partial, although I'm not sure how that works yet.
+
+## Debugging
+
+Majority of the console log is enabled through the `DEBUG` environment variable, based on space or comma-delimited names.
+
+On Windows, this can be done using the `set` command.
+
+	set DEBUG=*,-not_this
 
 ## Assets
 
