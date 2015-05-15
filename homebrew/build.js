@@ -8,28 +8,8 @@ var Metalsmith   = require('metalsmith'),
     uglify       = require('metalsmith-uglify'),
     watch        = require('metalsmith-watch'),
 
-    /*
-     * Conditional Function. Only run the callback if the desired flag is
-     * passed in while running this script.
-     *
-     * node build --serve
-     *
-     * condFn({
-     *     flag: '--serve',
-     *     callback: (function() {
-     *         return serve();
-     *     })()
-     * })
-     */
-    condFn = function(config) {
-        return function(files, metalsmith, done) {
-            if(process.argv.indexOf(config.flag) > -1) {
-                config.callback.call(null, files, metalsmith, done);
-            } else {
-                done();
-            }
-        }
-    };
+    /* Custom modules */
+    runWhen      = require('./custom-modules/run-when.js');
 
 handlebars.registerPartial('samplePartial', fs.readFileSync(__dirname + '/templates/partials/sample-partial.html').toString());
 
@@ -61,23 +41,19 @@ Metalsmith(__dirname)
     .use(templates('handlebars'))
 
     /* --serve */
-    .use(condFn({
+    .use(runWhen({
         flag: '--serve',
-        callback: (function() {
-            return watch({
-                paths: {
-                    "${source}/**/*": true,
-                    "${source}/**/*.scss": "scss/style.scss",
-                    "templates/**/*": "**/*.html"
-                }
-            });
-        })()
+        callback: watch({
+            paths: {
+                "${source}/**/*": true,
+                "${source}/**/*.scss": "scss/style.scss",
+                "templates/**/*": "**/*.html"
+            }
+        })
     }))
-    .use(condFn({
+    .use(runWhen({
         flag: '--serve',
-        callback: (function() {
-            return serve();
-        })()
+        callback: serve()
     }))
 
     /* END! */
