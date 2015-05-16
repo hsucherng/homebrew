@@ -1257,7 +1257,7 @@ var homebrew = {};
 
             instance.disable();
 
-            $(window).on('resize.' + instance.uniqueID, _homebrew.throttle(function() {
+            $(window).on('resize.' + instance.uniqueId, _homebrew.throttle(function() {
                 instance.sync();
             }, 50));
 
@@ -1265,7 +1265,7 @@ var homebrew = {};
         },
 
         disable: function() {
-            $(window).off('resize.' + this.uniqueID);
+            $(window).off('resize.' + this.uniqueId);
             return this;
         },
 
@@ -1273,11 +1273,12 @@ var homebrew = {};
             var instance = this,
                 $row = $(),
                 leftOffset,
-                currentLeftThreshold = -99999,
+                currentLeftThreshold,
                 totalItems;
 
             for(var i = 0, ii = instance.$items.length; i < ii; i++) {
                 totalItems = instance.$items[i].length;
+                currentLeftThreshold = -9999;
 
                 instance.$items[i].each(function(index) {
                     var $thisItem = $(this);
