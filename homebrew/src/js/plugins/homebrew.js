@@ -1196,12 +1196,12 @@ var homebrew = {};
             var instance = this,
                 i;
 
-            $.extend(instance, args);
-
-            instance.$items = instance.items.map(function(arrVal) {
-                return instance.$el.find(arrVal);
-            }).filter(function(arrVal) {
-                return _homebrew.jQueryObjectExists(arrVal);
+            $.extend(instance, args, {
+                $items: args.items.map(function(arrVal) {
+                    return instance.$el.find(arrVal);
+                }).filter(function(arrVal) {
+                    return _homebrew.jQueryObjectExists(arrVal);
+                })
             });
 
             for(i = instance.$items.length-1; i > -1; i--) {
