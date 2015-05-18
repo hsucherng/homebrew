@@ -40,7 +40,6 @@ var homebrew = {};
      *  Homebrew Utility Functions
      *      - makePlugin
      *      - makeGroupPlugin
-     *      - select
      *      - generateUniqueId
      *      - getAttributesFrom
      *      - getSelectorsFrom
@@ -98,34 +97,6 @@ var homebrew = {};
                     }
                 });
             };
-        },
-
-        /* $$ homebrew.select() */
-        select: function(src, $el) {
-            if(typeof src !== 'string') {
-                console.error('homebrew.select(): Expecting a string as the first argument. Please check:');
-                console.log(src);
-                return $();
-            }
-
-            switch(src) {
-                case 'next' : 
-                    return $el.next();
-                break;
-
-                case 'prev' : 
-                    return $el.prev();
-                break;
-
-                case 'parent' :
-                    return $el.parent();
-                break;
-
-                default :
-                    console.error('homebrew.select(): String passed in does not refer to a preset value. String value received: ' + src);
-                    return $();
-                break;
-            }
         },
 
         generateUniqueId: function() {
