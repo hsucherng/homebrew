@@ -2,6 +2,7 @@ var Metalsmith   = require('metalsmith'),
     autoprefixer = require('metalsmith-autoprefixer'),
     fs           = require('fs'),
     handlebars   = require('handlebars'),
+    minimatch    = require('minimatch'),
     sass         = require('metalsmith-sass'),
     serve        = require('metalsmith-serve'),
     templates    = require('metalsmith-templates'),
@@ -29,11 +30,7 @@ Metalsmith(__dirname)
     /* JS */
     .use(uglify({
         filter: function(filepath) {
-            if(filepath.substr(filepath.length-3) == '.js') {
-                return (filepath.substr(filepath.length-7) != '.min.js');
-            } else {
-                return false;
-            }
+            return minimatch(filepath, '**/*.js') && !minimatch(filepath, '**/*.min.js');
         }
     }))
 
