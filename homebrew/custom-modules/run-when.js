@@ -1,3 +1,13 @@
+/*
+ * Only run the callback if the desired flag is passed in.
+ *
+ * e.g. node build --dev
+ *
+ * runWhen({
+ *     flag: '--dev',
+ *     callback: serve()
+ * })
+ */
 var debug = require('debug')('runWhen');
 
 module.exports = function(options) {
