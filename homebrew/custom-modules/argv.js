@@ -1,21 +1,22 @@
 /*
- * Pass arguments while running command.
+ * Get arguments that are declared while running the script.
  *
- * e.g. node build host=127.0.0.0
+ * Example:
  *
- * argv({
- *     key: 'host',
- *     defaultVal: 'localhost'
- * })
+ * node build host=127.0.0.0 --serve
  *
- * Returns '127.0.0.0'. If no argument for `host` then it returns 'localhost'.
+ * argv('host') // returns '127.0.0.0'
+ * argv('--serve') // returns true
+ * argv('foo') // returns false
  *
  */
-module.exports = function(options) {
-    var key = options.key;
-
+module.exports = function(key) {
     for(var i = 0; i < process.argv.length; i++) {
-        if(process.argv[i].indexOf(key) === 0) {
+        if(key.substr(0,2) === '--') {
+            if(process.argv[i] === key) {
+                return true;
+            }
+        } else if(process.argv[i].indexOf(key) === 0) {
             var splitKeyStr = process.argv[i].split('=');
 
             if(splitKeyStr.length === 2) {
@@ -24,5 +25,5 @@ module.exports = function(options) {
         }
     }
 
-    return options.defaultVal;
+    return false;
 };
