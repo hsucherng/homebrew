@@ -1,16 +1,18 @@
-var Metalsmith   = require('metalsmith'),
-    autoprefixer = require('metalsmith-autoprefixer'),
-    fs           = require('fs'),
-    handlebars   = require('handlebars'),
-    minimatch    = require('minimatch'),
-    sass         = require('metalsmith-sass'),
-    serve        = require('metalsmith-serve'),
-    templates    = require('metalsmith-templates'),
-    uglify       = require('metalsmith-uglify'),
-    watch        = require('metalsmith-watch'),
+var Metalsmith      = require('metalsmith'),
+    autoprefixer    = require('metalsmith-autoprefixer'),
+    fs              = require('fs'),
+    handlebars      = require('handlebars'),
+    minimatch       = require('minimatch'),
+    sass            = require('metalsmith-sass'),
+    serve           = require('metalsmith-serve'),
+    templates       = require('metalsmith-templates'),
+    uglify          = require('metalsmith-uglify'),
+    watch           = require('metalsmith-watch'),
 
     /* Custom modules */
-    runWhen      = require('./custom-modules/run-when.js');
+    argv            = require('./custom-modules/argv.js'),
+    run             = require('./custom-modules/run.js'),
+    defaultTemplate = require('./custom-modules/default-template.js');
 
 handlebars.registerPartial('samplePartial', fs.readFileSync(__dirname + '/templates/partials/sample-partial.html').toString());
 
@@ -35,11 +37,15 @@ Metalsmith(__dirname)
     }))
 
     /* HTML */
+    .use(defaultTemplate({
+        pattern: '*/*.html',
+        template: 'default.hbt'
+    }))
     .use(templates('handlebars'))
 
     /* --serve */
-    .use(runWhen({
-        flag: '--serve',
+    .use(run({
+        when: '--serve',
         callback: watch({
             paths: {
                 "${source}/**/*": true,
@@ -48,9 +54,12 @@ Metalsmith(__dirname)
             }
         })
     }))
-    .use(runWhen({
-        flag: '--serve',
-        callback: serve()
+    .use(run({
+        when: '--serve',
+        callback: serve({
+            host: (argv('host')) ? argv('host') : 'localhost',
+            port: (argv('port')) ? argv('port') : '8080'
+        })
     }))
 
     /* END! */
