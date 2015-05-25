@@ -1242,12 +1242,13 @@ var homebrew = {};
 
         sync : function() {
             var instance = this,
-                $row = $(),
+                $row,
                 leftOffset,
                 currentLeftThreshold,
                 totalItems;
 
             for(var i = 0, ii = instance.$items.length; i < ii; i++) {
+                $row = $();
                 totalItems = instance.$items[i].length;
                 currentLeftThreshold = -9999;
 
