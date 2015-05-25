@@ -11,8 +11,8 @@ var Metalsmith      = require('metalsmith'),
 
     /* Custom modules */
     argv            = require('./custom-modules/argv.js'),
-    run             = require('./custom-modules/run.js'),
-    defaultTemplate = require('./custom-modules/default-template.js');
+    run             = require('./custom-modules/metalsmith-run.js'),
+    defaultTemplate = require('./custom-modules/metalsmith-default-template.js');
 
 handlebars.registerPartial('samplePartial', fs.readFileSync(__dirname + '/templates/partials/sample-partial.html').toString());
 
