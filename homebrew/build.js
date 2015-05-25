@@ -43,9 +43,8 @@ Metalsmith(__dirname)
     }))
     .use(templates('handlebars'))
 
-    /* --serve */
     .use(run({
-        when: '--serve',
+        unless: '--dist',
         callback: watch({
             paths: {
                 "${source}/**/*": true,
@@ -55,7 +54,7 @@ Metalsmith(__dirname)
         })
     }))
     .use(run({
-        when: '--serve',
+        unless: '--dist',
         callback: serve({
             host: (argv('host')) ? argv('host') : 'localhost',
             port: (argv('port')) ? argv('port') : '8080'
