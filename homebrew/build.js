@@ -1,6 +1,6 @@
 var Metalsmith      = require('metalsmith'),
     autoprefixer    = require('metalsmith-autoprefixer'),
-    fs              = require('fs'),
+    fs              = require('fs-extra'),
     handlebars      = require('handlebars'),
     minimatch       = require('minimatch'),
     sass            = require('metalsmith-sass'),

@@ -10,6 +10,7 @@
   "license": "BSD-2-Clause",
   "devDependencies": {
     "debug": "^2.0.0",
+    "fs-extra": "^0.18.4",
     "handlebars": "^3.0.3",
     "lodash": "^2.4.2",
     "lodash.omit": "^2.4.1",
