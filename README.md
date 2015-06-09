@@ -7,7 +7,7 @@ A personal boilerplate for myself. Has a couple of variations, e.g. vanilla CSS 
 This particular branch uses [Metalsmith](http://metalsmith.io) with the following plugins setup:
 
 - [Autoprefixer](https://github.com/postcss/autoprefixer)
-- [Handlebars](http://handlebarsjs.com/)
+- [Swig](http://paularmstrong.github.io/swig/)
 - [SASS](http://sass-lang.com/)
 - [Uglify](https://github.com/ksmithut/metalsmith-uglify)
 
@@ -17,7 +17,7 @@ This particular branch uses [Metalsmith](http://metalsmith.io) with the followin
 2. Make a copy of the *homebrew* folder.
 3. Open up the CLI (command-line interface, e.g. cmd.exe) and `cd` into the fresh copy of the *homebrew* folder.
 4. Run `npm install`. This should install all the required dependencies.
-5. Run `node build` to build the site, which should compile into a new *build* folder. Alternatively, run `node build --serve` to build the site *and* serve it up on localhost (port 8080 by default).
+5. Run `node build` to build the site, which should compile into a new *build* folder, and then serve it up on localhost (http://localhost:8080 by default). Use the `node build --dist` to just build without serving the localhost.
 
 No LiveReload / BrowserSync, so make sure Metalsmith is properly watching & rebuilding the changes before reloading the page.
 
@@ -25,25 +25,17 @@ No LiveReload / BrowserSync, so make sure Metalsmith is properly watching & rebu
 
 This is still a rather new, immature workflow, so there are a couple of hiccups while working with it. We'll need to workaround it until an optimal solution is found.
 
-**After running `node serve`, copying images to the *src* folder does not trigger a rebuild.**
+**After running `node build`, copying images to the *src* folder does not trigger a rebuild.**
 
-Current workaround is to re-run the `node serve` command again. On Windows, you can press *CTRL + C* to shutdown the currently running localhost, so that you can re-run the `node serve` command again.
+Current workaround is to re-run the `node build` command. On Windows, you can press *CTRL + C* to shutdown the currently running localhost, so that you can re-run the `node build` command.
 
-**SASS errors don't seem to be properly logged while running `node serve`.**
+**SASS errors don't seem to be properly logged when making changes while localhost is up.**
 
-Current workaround is to run `node build` so that a more detailed error log is shown in the CLI, then fix the issue from there.
-
-**Template partials are not automatically updated while running `node serve`.**
-
-Current work around is to re-run the `node serve` command again. On Windows, you can press *CTRL + C* to shutdown the currently running localhost, so that you can re-run the `node serve` command again.
-
-**Template partials need to be manually registered inside `build.js`.**
-
-Not sure how to automate it yet. Might need a plugin like metalsmith-partial, although I'm not sure how that works yet.
+Current workaround is to re-run the `node build` so that a more detailed error log is shown in the CLI, then fix the issue from there. On Windows, you can press *CTRL + C* to shutdown the currently running localhost, so that you can re-run the `node build` command.
 
 ## Debugging
 
-Majority of the console log is enabled through the `DEBUG` environment variable, based on space or comma-delimited names.
+Some of the console log is enabled through the `DEBUG` environment variable, based on space or comma-delimited names.
 
 On Windows, this can be done using the `set` command.
 
