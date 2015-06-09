@@ -11,7 +11,7 @@ var Metalsmith      = require('metalsmith'),
     /* Custom modules */
     argv            = require('./custom-modules/argv.js'),
     run             = require('./custom-modules/metalsmith-run.js'),
-    templates       = require('./custom-modules/templates.js'),
+    templates       = require('./custom-modules/metalsmith-swig-templates.js'),
     defaultMeta     = require('./custom-modules/metalsmith-default-meta.js');
 
 console.log('Building...');
