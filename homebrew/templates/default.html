@@ -7,7 +7,7 @@
         <meta charset="utf-8" />
         <meta name="viewport" content="width=device-width, initial-scale=1" />
         <meta name="format-detection" content="telephone=no"> <!-- Disable iOS auto telephone number detection -->
-        <title>{{#if title}}{{title}} | {{/if}}Website Title</title>
+        <title>{% if title %}{{title}} | {% endif %}Website Title</title>
         <link rel="stylesheet" href="http://brick.a.ssl.fastly.net/Roboto:300,400,700,400i,700i">
         <link href="css/style.css" rel="stylesheet" type="text/css" />
         <script src="js/plugins/modernizr.min.js"></script>
@@ -19,7 +19,8 @@
             </div>
         </header>
 
-        <main class="site-content" role="main">{{{contents}}}
+        <main class="site-content" role="main">
+            {% block content %}{% endblock %}
         </main>
 
         <footer class="site-footer">
@@ -32,9 +33,6 @@
         <script>window.jQuery || document.write('<script src="js/plugins/jquery.1.11.1.min.js"><\/script>')</script>
         <script src="js/plugins/homebrew.min.js"></script>
         <script src="js/init.js"></script>
-{{#each scripts}}
-        <script src="{{this}}"></script>
-{{/each}}
-        {{> samplePartial}}
+        {% block scripts %}{% endblock %}
     </body>
 </html>
