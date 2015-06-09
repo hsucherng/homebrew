@@ -12,7 +12,7 @@ var Metalsmith      = require('metalsmith'),
     /* Custom modules */
     argv            = require('./custom-modules/argv.js'),
     run             = require('./custom-modules/metalsmith-run.js'),
-    defaultTemplate = require('./custom-modules/metalsmith-default-template.js');
+    defaultMeta     = require('./custom-modules/metalsmith-default-meta.js');
 
 handlebars.registerPartial('samplePartial', fs.readFileSync(__dirname + '/templates/partials/sample-partial.html').toString());
 
@@ -37,9 +37,11 @@ Metalsmith(__dirname)
     }))
 
     /* HTML */
-    .use(defaultTemplate({
-        pattern: '*/*.html',
-        template: 'default.hbt'
+    .use(defaultMeta({
+        pattern: '*.html',
+        meta: {
+            template: 'default.hbt'
+        }
     }))
     .use(templates('handlebars'))
 

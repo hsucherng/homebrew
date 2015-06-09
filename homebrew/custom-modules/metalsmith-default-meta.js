@@ -1,17 +1,20 @@
 /*
- * Sets a default template for Handlebars to use.
+ * Set default metadata for plugins to consume.
  *
- * defaultTemplate({
+ * defaultMeta({
  *     pattern: '**\/*.html',
- *     template: 'default.hbt'
- * })
+ *     meta: {
+ *         layout: 'default.html'
+ *     }
+ * });
  * 
  */
 var minimatch = require('minimatch');
 
 module.exports = function(options) {
     var pattern = options.pattern,
-        template = options.template;
+        meta = options.meta || {},
+        metaKeys = Object.keys(meta);
 
     return function(files, metalsmith, done) {
         Object.keys(files)
@@ -21,8 +24,10 @@ module.exports = function(options) {
             .forEach(function(keystr) {
                 var file = files[keystr];
 
-                if(!file.template) {
-                    file.template = template;
+                for(var i = 0; i < metaKeys.length; i++) {
+                    if(typeof file[metaKeys[i]] === 'undefined') {
+                        file[metaKeys[i]] = meta[metaKeys[i]];
+                    }
                 }
             });
 
