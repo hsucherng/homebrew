@@ -2,34 +2,20 @@ var homebrew = {};
 
 (function($, window, document) {
     /* Setup homebrew object */
-    var _homebrew = homebrew,
-        $root = $('html');
+    var _homebrew = homebrew;
 
     $.extend(_homebrew, {
-        /* Basic IE & FF detection */
-        browser : {
-            ie:      $root.hasClass('ie'),
-            ie9:     $root.hasClass('ie9'),
-            lt9:     $root.hasClass('lt9'),
-            ie8:     $root.hasClass('ie8'),
-            lt8:     $root.hasClass('lt8'),
-            firefox: (window.mozIndexedDB !== undefined)
-        },
-
         events : {
             transitionend: 'oTransitionEnd otransitionend webkitTransitionEnd transitionend'
         },
 
         classes : {
-            shown:            'is-shown',
             hidden:           'is-hidden',
             active:           'is-active',
             disabled:         'is-disabled',
             transition:       'can-transition',
-            noTransition:     'cant-transition',
             transitionIn:     'is-transitioning-in',
-            transitionOut:    'is-transitioning-out',
-            hiddenAccessible: 'hidden-accessible'
+            transitionOut:    'is-transitioning-out'
         }
     });
 
@@ -1865,7 +1851,7 @@ var homebrew = {};
                                 .prop('disabled', true)
                                 .each(function() {
                                     if(!this.labels.length) return;
-                                    $(this.labels).addClass('is-disabled');
+                                    $(this.labels).addClass(_homebrew.classes.disabled);
                                 });
                     } else {
                         this.$el
@@ -1873,7 +1859,7 @@ var homebrew = {};
                                 .prop('disabled', false)
                                 .each(function() {
                                     if(!this.labels.length) return;
-                                    $(this.labels).removeClass('is-disabled');
+                                    $(this.labels).removeClass(_homebrew.classes.disabled);
                                 });
                     }
 
