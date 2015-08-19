@@ -10,6 +10,7 @@ var Metalsmith      = require('metalsmith'),
 
     /* Custom modules */
     argv            = require('./custom-modules/argv.js'),
+    jsPartials      = require('./custom-modules/metalsmith-js-partial.js'),
     run             = require('./custom-modules/metalsmith-run.js'),
     templates       = require('./custom-modules/metalsmith-swig-templates.js'),
     defaultMeta     = require('./custom-modules/metalsmith-default-meta.js');
@@ -33,9 +34,12 @@ Metalsmith(__dirname)
     .use(autoprefixer())
 
     /* JS */
+    .use(jsPartials())
     .use(uglify({
         filter: function(filepath) {
-            return minimatch(filepath, '**/*.js') && !minimatch(filepath, '**/*.min.js');
+            return minimatch(filepath, '**/js/*/*.js')
+                && !minimatch(filepath, '**/*.min.js')
+                && !minimatch(filepath, '**/partials/**/*.js');
         }
     }))
 
@@ -48,8 +52,10 @@ Metalsmith(__dirname)
         unless: '--dist',
         callback: watch({
             paths: {
-                "${source}/**/*": true,
-                "${source}/**/*.scss": "scss/style.scss",
+                "${source}/*": true,
+                "${source}/!(js|scss)/**/*": true,
+                "${source}/js/**/*.js": "js/**/*.js",
+                "${source}/scss/**/*.scss": "scss/style.scss",
                 "templates/**/*": "**/*.html"
             }
         })
