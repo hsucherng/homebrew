@@ -45,7 +45,6 @@ On Windows, this can be done using the `set` command.
 
 As with the other branches, this also contains a small collection of commonly used assets that can be plug-and-played. Their CSS styles are located in `scss/assets/homebrew/` while their JavaScript functions are located in `js/plugins/homebrew.js`. So far, the list of assets covered are as follows:
 
-- Carousels
 - Dropdowns
 - Height Syncing
 - Popups
