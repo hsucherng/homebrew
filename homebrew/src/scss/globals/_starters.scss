@@ -26,7 +26,17 @@ textarea {
     line-height: 1.42;
 }
 
-
+h1,
+h2,
+h3,
+h4,
+h5,
+h6,
+p,
+ul,
+ol {
+    margin: 0;
+}
 
 h1, .h1,
 h2, .h2,
@@ -34,9 +44,8 @@ h3, .h3,
 h4, .h4,
 h5, .h5,
 h6, .h6 {
-    font-family: $font-family-base;
+    font-family: $font-family-alpha;
     font-weight: 300;
-    margin: 0 0 30px;
     line-height: 1;
 }
 
@@ -49,10 +58,6 @@ h3, .h3 { font-size: 28px; }
 h4, .h4 { font-size: 24px; }
 h5, .h5 { font-size: 20px; }
 h6, .h6 { font-size: 16px; }
-
-p {
-    margin: 0 0 30px;
-}
 
 label {
     cursor: pointer;
@@ -69,16 +74,12 @@ label {
 
 a {
     border-bottom: 1px solid;
-    color: $blue;
+    color: inherit;
     text-decoration: none;
-}
-a:hover {
-    color: lighten($blue, 10%);
 }
 
 a,
 button,
 input {
-    transition: none 0.4s $easeOutExpo;
-    transition-property: color, border-color, background-color, opacity;
+    @include transition((color, border-color, background-color, opacity));
 }

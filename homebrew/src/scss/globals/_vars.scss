@@ -5,6 +5,7 @@
     $ Colors
     $ Easings
     $ Fonts
+    $ General
 
 -----------------------------------------------------------------------------*/
 
@@ -44,6 +45,17 @@ $easeInQuad:   cubic-bezier(0.55, 0.085, 0.68, 0.53);
     $ Fonts
 -----------------------------------------------------------------------------*/
 
-$font-family-base:   'Roboto', 'Helvetica Neue', Helvetica, Arial, sans-serif;
+$font-family-base:   'Roboto', 'Helvetica Neue', 'Helvetica', 'Arial', sans-serif;
 $font-family-alpha:  'Proxima Nova', #{$font-family-base};
 $font-family-icon:   'Icon Font';
+
+
+
+
+
+/*-----------------------------------------------------------------------------
+    $ General
+-----------------------------------------------------------------------------*/
+
+$transition-duration: 0.4s;
+$transition-easing: $easeOutExpo;

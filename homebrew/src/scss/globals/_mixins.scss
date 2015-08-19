@@ -2,6 +2,34 @@
     General Mixins
 -----------------------------------------------------------------------------*/
 
+//
+// Usage:
+//     - @include transition(width);
+//     - @include transition((width, height));
+//     - @include transition((width, height), 0.6s);
+//     - @include transition((width, height), 0.6s, $easeInQuad);
+//
+@mixin transition($props, $duration: $transition-duration, $easing: $transition-easing) {
+    @if(type-of($props) == list) {
+        transition: none $duration $easing;
+        transition-property: $props;
+    } @else {
+        transition: $props $duration $easing;
+    }
+}
+
+
+//
+//@mixin placeholders() {
+//    &::-webkit-input-placeholder { @content; }
+//        &::-ms-input-placeholder { @content; }
+//         &:-ms-input-placeholder { @content; }
+//             &::-moz-placeholder { @content; }
+//              &:-moz-placeholder { @content; }
+//}
+//
+
+//
 //@mixin clearfix() {
 //    &:after {
 //        content: ' ';
@@ -10,11 +38,15 @@
 //    }
 //}
 //
+
+//
 //@mixin ellipsis() {
 //    overflow: hidden;
 //    text-overflow: ellipsis;
 //    white-space: nowrap;
 //}
+//
+
 //
 //@mixin justify() {
 //    text-align: justify;
