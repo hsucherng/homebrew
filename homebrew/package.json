@@ -10,7 +10,6 @@
   "license": "BSD-2-Clause",
   "devDependencies": {
     "debug": "^2.0.0",
-    "fs-extra": "^0.18.4",
     "metalsmith": "^1.7.0",
     "metalsmith-autoprefixer": "^1.0.2",
     "metalsmith-sass": "^0.7.0",
