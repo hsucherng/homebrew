@@ -1,5 +1,8 @@
 var Metalsmith      = require('metalsmith'),
     autoprefixer    = require('metalsmith-autoprefixer'),
+    filenames       = require('metalsmith-filenames'),
+    inPlace         = require('metalsmith-in-place'),
+    layouts         = require('metalsmith-layouts'),
     minimatch       = require('minimatch'),
     sass            = require('metalsmith-sass'),
     serve           = require('metalsmith-serve'),
@@ -11,7 +14,6 @@ var Metalsmith      = require('metalsmith'),
     argv            = require('./custom-modules/argv.js'),
     jsPartials      = require('./custom-modules/metalsmith-js-partial.js'),
     run             = require('./custom-modules/metalsmith-run.js'),
-    templates       = require('./custom-modules/metalsmith-swig-templates.js'),
     defaultMeta     = require('./custom-modules/metalsmith-default-meta.js');
 
 console.log('Building...');
@@ -43,8 +45,12 @@ Metalsmith(__dirname)
     }))
 
     /* HTML */
-    .use(templates({
-        pattern: '*.html'
+    .use(filenames())
+    .use(inPlace({
+        engine: 'swig'
+    }))
+    .use(layouts({
+        engine: 'swig'
     }))
 
     .use(run({
