@@ -2,19 +2,20 @@
  * Commonly used regular expressions.
  */
 
-module.exports = {
+var captureHtmlTagAttrs = '(?: ((?:(?:\\S| )+?)))?';
 
+module.exports = {
     /*
      * var str = '    <myTag implicit-attr explicit-attr="value">Contents</myTag>';
      *
      * str.replace(regexpFactory.tag('myTag'), function($0, $1, $2) {
      *     console.log($0); // '<myTag implicit-attr explicit-attr="value">Contents</myTag>'
-     *     console.log($1); // ' implicit-attr explicit-attr="value"'
+     *     console.log($1); // 'implicit-attr explicit-attr="value"'
      *     console.log($2); // 'Contents'
      * });
      */
     tag: function(tagName) {
-        return new RegExp('<' + tagName + '(.*?)>((?:.|\\n|\\r)*?)<\/' + tagName + '>', 'g');
+        return new RegExp('<' + tagName + captureHtmlTagAttrs + '>((?:.|\\n|\\r)*?)<\/' + tagName + '>', 'g');
     },
 
     /*
@@ -23,12 +24,12 @@ module.exports = {
      * str.replace(regexpFactory.indentTag('myTag'), function($0, $1, $2, $3) {
      *     console.log($0); // '    <myTag implicit-attr explicit-attr="value">Contents</myTag>'
      *     console.log($1); // '    '
-     *     console.log($2); // ' implicit-attr explicit-attr="value"'
+     *     console.log($2); // 'implicit-attr explicit-attr="value"'
      *     console.log($3); // 'Contents'
      * });
      */
     indentTag: function(tagName) {
-        return new RegExp('( *?)<' + tagName + '(.*?)>((?:.|\\n|\\r)*?)<\/' + tagName + '>', 'g');
+        return new RegExp('( *?)<' + tagName + captureHtmlTagAttrs + '>((?:.|\\n|\\r)*?)<\/' + tagName + '>', 'g');
     },
 
 
@@ -37,11 +38,11 @@ module.exports = {
      *
      * str.replace(regexpFactory.voidTag('myTag'), function($0, $1) {
      *     console.log($0); // '<myTag implicit-attr explicit-attr="value" />'
-     *     console.log($1); // ' implicit-attr explicit-attr="value"'
+     *     console.log($1); // 'implicit-attr explicit-attr="value"'
      * });
      */
     voidTag: function(tagName) {
-        return new RegExp('<' + tagName + '(.*?)\/>', 'g');
+        return new RegExp('<' + tagName + captureHtmlTagAttrs + ' \/>', 'g');
     },
 
 
@@ -51,11 +52,11 @@ module.exports = {
      * str.replace(regexpFactory.indentVoidTag('myTag'), function($0, $1, $2) {
      *     console.log($0); // '    <myTag implicit-attr explicit-attr="value" />'
      *     console.log($1); // '    '
-     *     console.log($2); // ' implicit-attr explicit-attr="value"'
+     *     console.log($2); // 'implicit-attr explicit-attr="value"'
      * });
      */
     indentVoidTag: function(tagName) {
-        return new RegExp('( *?)<' + tagName + '(.*?)\/>', 'g');
+        return new RegExp('( *?)<' + tagName + captureHtmlTagAttrs + ' \/>', 'g');
     },
 
     /*
