@@ -1,35 +1,38 @@
 /*
  * Set default metadata for plugins to consume.
  *
- * defaultMeta({
- *     pattern: '**\/*.html',
- *     meta: {
- *         layout: 'default.html'
- *     }
- * });
- * 
+ *  .use(defaultMeta({
+ *      'your-pattern-here': {
+ *          prop: 'value'
+ *      }
+ *  }));
  */
 var minimatch = require('minimatch');
 
 module.exports = function(options) {
-    var pattern = options.pattern,
-        meta = options.meta || {},
-        metaKeys = Object.keys(meta);
+    var patterns = Object.keys(options);
 
     return function(files, metalsmith, done) {
-        Object.keys(files)
-            .filter(function(keystr) {
-                return minimatch(keystr, pattern);
-            })
-            .forEach(function(keystr) {
-                var file = files[keystr];
+        var fileKeys = Object.keys(files);
 
-                for(var i = 0; i < metaKeys.length; i++) {
-                    if(typeof file[metaKeys[i]] === 'undefined') {
-                        file[metaKeys[i]] = meta[metaKeys[i]];
+        patterns.forEach(function(patternStr) {
+            var metaObj = options[patternStr],
+                metaKeys = Object.keys(metaObj);
+
+            fileKeys
+                .filter(function(keystr) {
+                    return minimatch(keystr, patternStr);
+                })
+                .forEach(function(keystr) {
+                    var file = files[keystr];
+
+                    for(var i = 0; i < metaKeys.length; i++) {
+                        if(typeof file[metaKeys[i]] === 'undefined') {
+                            file[metaKeys[i]] = metaObj[metaKeys[i]];
+                        }
                     }
-                }
-            });
+                });
+        });
 
         done();
     }
