@@ -39,8 +39,8 @@ module.exports = function(options) {
 
                 argStr = argStr.trim();
 
-                var argStr__firstChar = argStr.substr(0,1),
-                    argStr__lastChar = argStr.substr(argStr.length-1,1);
+                var argStr__firstChar = argStr.charAt(0),
+                    argStr__lastChar = argStr.charAt(argStr.length-1);
 
                 if(argStr__firstChar === '"' && argStr__lastChar === '"'
                 || argStr__firstChar === "'" && argStr__lastChar === "'") {
@@ -75,7 +75,7 @@ module.exports = function(options) {
                 var splitFilepath = filepath.split('\\'),
                     filename = splitFilepath[splitFilepath.length-1];
 
-                return filename.substr(0,1) === '_';
+                return filename.charAt(0) === '_';
             })
             .forEach(function(filepath) {
                 delete files[filepath];
