@@ -45,9 +45,8 @@ $easeInQuad:   cubic-bezier(0.55, 0.085, 0.68, 0.53);
     $ Fonts
 -----------------------------------------------------------------------------*/
 
-$font-family-base:   'Roboto', 'Helvetica Neue', 'Helvetica', 'Arial', sans-serif;
-$font-family-alpha:  'Proxima Nova', #{$font-family-base};
-$font-family-icon:   'Icon Font';
+$font-family-base:   'Helvetica Neue', 'Helvetica', 'Arial', sans-serif;
+$font-family-alpha:  'Georgia', #{$font-family-base};
 
 
 
