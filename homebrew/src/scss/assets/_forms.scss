@@ -6,19 +6,17 @@
     padding: 0.25em;
     border: 1px solid #ccc;
     outline: 0;
-    transition: border-color 0.15s;
+    @include transition(border-color);
+
+    &:hover,
+    &:focus {
+        border-color: #aaa;
+    }
+
+    &::-webkit-input-placeholder { color: #ccc; }
+        &::-ms-input-placeholder { color: #ccc; }
+         &:-ms-input-placeholder { color: #ccc; }
+             &::-moz-placeholder { color: #ccc; }
+              &:-moz-placeholder { color: #ccc; }
+                &.is-placeholder { color: #ccc; }
 }
-
-.field:hover,
-.field:focus {
-    border-color: #aaa;
-}
-
-/* Placeholder styles */
-
-::-webkit-input-placeholder { color: #ccc; }
-    ::-ms-input-placeholder { color: #ccc; }
-     :-ms-input-placeholder { color: #ccc; }
-         ::-moz-placeholder { color: #ccc; }
-          :-moz-placeholder { color: #ccc; }
-            .is-placeholder { color: #ccc; }
