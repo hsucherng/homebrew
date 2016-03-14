@@ -19,15 +19,15 @@
 }
 
 
-//
-//@mixin placeholders() {
-//    &::-webkit-input-placeholder { @content; }
-//        &::-ms-input-placeholder { @content; }
-//         &:-ms-input-placeholder { @content; }
-//             &::-moz-placeholder { @content; }
-//              &:-moz-placeholder { @content; }
-//}
-//
+
+@mixin placeholders() {
+   &::-webkit-input-placeholder { @content; }
+       &::-ms-input-placeholder { @content; }
+        &:-ms-input-placeholder { @content; }
+            &::-moz-placeholder { @content; }
+             &:-moz-placeholder { @content; }
+}
+
 
 //
 //@mixin clearfix() {

@@ -7,16 +7,12 @@
     border: 1px solid #ccc;
     outline: 0;
     @include transition(border-color);
+    @include placeholders {
+        color: #fff;
+    }
 
     &:hover,
     &:focus {
         border-color: #aaa;
     }
-
-    &::-webkit-input-placeholder { color: #ccc; }
-        &::-ms-input-placeholder { color: #ccc; }
-         &:-ms-input-placeholder { color: #ccc; }
-             &::-moz-placeholder { color: #ccc; }
-              &:-moz-placeholder { color: #ccc; }
-                &.is-placeholder { color: #ccc; }
 }
