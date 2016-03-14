@@ -1,3 +1,11 @@
+/* Initial dependency */
+var argv = require('./custom-modules/argv.js');
+
+/* Default build settings */
+var host = argv('host') ? argv('host') : 'localhost',
+    port = argv('port') ? argv('port') : '8080';
+
+/* Metalsmith START */
 var Metalsmith      = require('metalsmith'),
     autoprefixer    = require('metalsmith-autoprefixer'),
     filenames       = require('metalsmith-filenames'),
@@ -11,7 +19,6 @@ var Metalsmith      = require('metalsmith'),
     watch           = require('metalsmith-watch'),
 
     /* Custom modules */
-    argv            = require('./custom-modules/argv.js'),
     jsPartials      = require('./custom-modules/metalsmith-js-partial.js'),
     run             = require('./custom-modules/metalsmith-run.js'),
     defaultMeta     = require('./custom-modules/metalsmith-default-meta.js');
@@ -68,8 +75,8 @@ Metalsmith(__dirname)
     .use(run({
         unless: '--dist',
         callback: serve({
-            host: (argv('host')) ? argv('host') : 'localhost',
-            port: (argv('port')) ? argv('port') : '8080'
+            host: host,
+            port: port
         })
     }))
 
