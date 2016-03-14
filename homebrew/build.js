@@ -8,6 +8,8 @@ var host = argv('host') ? argv('host') : 'localhost',
 /* Metalsmith START */
 var Metalsmith      = require('metalsmith'),
     autoprefixer    = require('metalsmith-autoprefixer'),
+    cleanCss        = require('metalsmith-clean-css'),
+    copy            = require('metalsmith-copy'),
     filenames       = require('metalsmith-filenames'),
     inPlace         = require('metalsmith-in-place'),
     layouts         = require('metalsmith-layouts'),
@@ -36,10 +38,17 @@ Metalsmith(__dirname)
 
     /* CSS */
     .use(sass({
-        outputStyle: "compressed",
+        outputStyle: "expanded",
         outputDir: "css/"
     }))
     .use(autoprefixer())
+    .use(copy({
+        pattern: 'css/style.css',
+        extension: '.min.css'
+    }))
+    .use(cleanCss({
+        files: 'css/style.min.css'
+    }))
 
     /* JS */
     .use(jsPartials())
