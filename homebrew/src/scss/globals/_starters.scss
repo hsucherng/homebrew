@@ -1,8 +1,7 @@
 /*-----------------------------------------------------------------------------
     Starters
 /*-----------------------------------------------------------------------------
-    Unique, opinionated base style that every site requires. You would
-    probably want to adjust this if you haven't already.
+    Just some super simple standardisation.
 -----------------------------------------------------------------------------*/
 
 *,
@@ -21,9 +20,7 @@ button,
 input,
 select,
 textarea {
-    font-family: $font-family-base;
-    font-size: 100%;
-    line-height: 1.42;
+    font: 100%/1.42 $font-family-base;
 }
 
 h1,
@@ -38,26 +35,14 @@ ol {
     margin: 0;
 }
 
-h1, .h1,
-h2, .h2,
-h3, .h3,
-h4, .h4,
-h5, .h5,
-h6, .h6 {
-    font-family: $font-family-alpha;
-    font-weight: 300;
-    line-height: 1;
+h1,
+h2,
+h3,
+h4,
+h5,
+h6 {
+    font: 300 1.25em/1 $font-family-alpha;
 }
-
-h5, .h5,
-h6, .h6 { line-height: 1.2; }
-
-h1, .h1 { font-size: 48px; }
-h2, .h2 { font-size: 36px; }
-h3, .h3 { font-size: 28px; }
-h4, .h4 { font-size: 24px; }
-h5, .h5 { font-size: 20px; }
-h6, .h6 { font-size: 16px; }
 
 label {
     cursor: pointer;
@@ -73,7 +58,6 @@ label {
 }
 
 a {
-    border-bottom: 1px solid;
     color: inherit;
     text-decoration: none;
 }
