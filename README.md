@@ -40,15 +40,3 @@ Some of the console log is enabled through the `DEBUG` environment variable, bas
 On Windows, this can be done using the `set` command.
 
 	set DEBUG=*,-not_this
-
-## Assets
-
-As with the other branches, this also contains a small collection of commonly used assets that can be plug-and-played. Their CSS styles are located in `scss/assets/homebrew/` while their JavaScript functions are located in `js/plugins/homebrew.js`. So far, the list of assets covered are as follows:
-
-- Dropdowns
-- Height Syncing
-- Popups
-- Tooltips
-- Validation
-
-The JavaScript functions are documented in its uncompressed file. Alternatively, you can visit the [documentation](http://hsucherng.github.io/homebrew) for more elaborately-formatted details.
