@@ -67,3 +67,7 @@ button,
 input {
     @include transition((color, border-color, background-color, opacity));
 }
+
+img {
+    max-width: 100%;
+}
