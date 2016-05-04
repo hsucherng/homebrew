@@ -18,12 +18,12 @@
 @import 'globals/starters';
 
 
-/*---- Assets ----*/
+/*---- Components ----*/
 
 
-@import 'assets/buttons';
-@import 'assets/icons';
-@import 'assets/forms';
+@import 'components/buttons';
+@import 'components/icons';
+@import 'components/forms';
 
 
 /*---- Main ----*/
@@ -34,7 +34,7 @@
 @import 'main/footer';
 
 
-/*---- Priority Assets ----*/
+/*---- Priority Components ----*/
 
 
-@import 'assets/helpers';
+@import 'components/helpers';

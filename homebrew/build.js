@@ -40,15 +40,15 @@ Metalsmith(__dirname)
     /* CSS */
     .use(sass({
         outputStyle: "expanded",
-        outputDir: "css/"
+        outputDir: "assets/css/"
     }))
     .use(autoprefixer())
     .use(copy({
-        pattern: 'css/style.css',
+        pattern: 'assets/css/style.css',
         extension: '.min.css'
     }))
     .use(cleanCss({
-        files: 'css/style.min.css'
+        files: 'assets/css/style.min.css'
     }))
 
     /* JS */
@@ -76,9 +76,10 @@ Metalsmith(__dirname)
         callback: watch({
             paths: {
                 "${source}/*": true,
-                "${source}/!(js|scss)/**/*": true,
-                "${source}/js/**/*.js": "js/**/*.js",
-                "${source}/scss/**/*.scss": "scss/style.scss",
+                "${source}/!(assets)/**/*": true,
+                "${source}/assets/!(js|scss)/**/*": true,
+                "${source}/assets/js/**/*.js": "assets/js/**/*.js",
+                "${source}/assets/scss/**/*.scss": "assets/scss/style.scss",
                 "templates/**/*": "**/*.html"
             }
         })
