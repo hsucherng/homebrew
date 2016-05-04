@@ -14,6 +14,7 @@ var Metalsmith      = require('metalsmith'),
     inPlace         = require('metalsmith-in-place'),
     layouts         = require('metalsmith-layouts'),
     minimatch       = require('minimatch'),
+    rootPath        = require('metalsmith-rootpath'),
     sass            = require('metalsmith-sass'),
     serve           = require('metalsmith-serve'),
     swig            = require('swig'),
@@ -62,6 +63,7 @@ Metalsmith(__dirname)
 
     /* HTML */
     .use(filenames())
+    .use(rootPath())
     .use(inPlace({
         engine: 'swig'
     }))
