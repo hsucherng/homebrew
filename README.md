@@ -13,7 +13,7 @@ This particular branch uses [Metalsmith](http://metalsmith.io) with the followin
 
 ## Setup
 
-1. Install [node](http://nodejs.org).
+1. Install [node](http://nodejs.org). Currently tested with v4.4.4.
 2. Make a copy of the *homebrew* folder.
 3. Open up the CLI (command-line interface, e.g. cmd.exe) and `cd` into the fresh copy of the *homebrew* folder.
 4. Run `npm install`. This should install all the required dependencies.
