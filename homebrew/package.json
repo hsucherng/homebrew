@@ -12,7 +12,7 @@
     "debug": "^2.2.0",
     "metalsmith": "^2.1.0",
     "metalsmith-autoprefixer": "^1.1.0",
-    "metalsmith-clean-css": "^4.0.0",
+    "metalsmith-clean-css": "^3.0.0",
     "metalsmith-copy": "^0.2.1",
     "metalsmith-filenames": "^1.0.0",
     "metalsmith-in-place": "^1.4.4",
