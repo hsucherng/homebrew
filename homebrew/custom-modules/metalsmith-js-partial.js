@@ -65,6 +65,14 @@ module.exports = function(options) {
                         }
 
                         return targetFileContents;
+                    } else {
+                        var errorStr = 'console.error(\'@js-partial ERROR: File "' + currentFolder.replace(/[\\]/g, '/') + '/' + targetFilepath + '" does not exist.\');';
+
+                        if(ignoreIndent !== '-') {
+                            errorStr = indentStr + errorStr;
+                        }
+
+                        return errorStr;
                     }
                 }
             });
