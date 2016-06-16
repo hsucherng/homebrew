@@ -48,7 +48,10 @@ Metalsmith(__dirname)
         extension: '.min.css'
     }))
     .use(cleanCss({
-        files: 'assets/css/style.min.css'
+        files: 'assets/css/style.min.css',
+        cleanCSS: {
+            advanced: false
+        }
     }))
 
     /* JS */
