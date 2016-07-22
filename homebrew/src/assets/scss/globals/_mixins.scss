@@ -30,6 +30,57 @@
 
 
 //
+// Assuming our variable is as below:
+//
+//     $media-queries: (
+//         xs-dn: (min-width: 480px),
+//         md-up: (min-width: 801px)
+//     );
+//
+// We can use the media mixin as below:
+//
+//     - @include media(xs-dn) { ... }
+//          - `xs-dn` is the key name inside the $media-queries list.
+//
+//     - @include media('(min-width: 569px)') { ... }
+//          - This is how we can declare a media query that doesn't exist
+//            in the $media-queries list. This is mainly so that we can combine
+//            custom queries with preset ones (see further below). If we're 
+//            just declaring a single unique media query, then it's recommended
+//            NOT to use the mixin, and just stick to the original @media syntax.
+//
+//     - @include media(xs-dn, md-up) { ... }
+//          - This is how we can declare multiple media queries for
+//            the same block. This will result in `@media (max-width: 480px),
+//            (min-width: 801px) { ... }`.
+//
+//     - @include media(xs-dn, '(min-width: 569px)') { ... }
+//          - While declaring multiple media queries, we can mix in both
+//            preset and custom queries. This will result in `@media
+//            (max-width: 480px), (min-width: 569px) { ... }`.
+//
+@mixin media($breakpoints...) {
+    $query: '';
+
+    @each $breakpoint in $breakpoints {
+        @if $query != '' {
+            $query: $query + ', ';
+        }
+
+        @if map-has-key($media-queries, $breakpoint) {
+            $query: $query + map-get($media-queries, $breakpoint);
+        } @else {
+            $query: $query + $breakpoint;
+        }
+    }
+
+    @media #{$query} {
+        @content;
+    }
+}
+
+
+//
 //@mixin clearfix() {
 //    &:after {
 //        content: ' ';

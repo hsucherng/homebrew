@@ -5,6 +5,7 @@
 //  $ Colors
 //  $ Easings
 //  $ Fonts
+//  $ Media
 //  $ General
 //
 //-----------------------------------------------------------------------------
@@ -44,6 +45,47 @@ $easeInQuad:   cubic-bezier(0.55, 0.085, 0.68, 0.53);
 
 $font-family-base:   'Helvetica Neue', 'Helvetica', 'Arial', sans-serif;
 $font-family-alpha:  'Georgia', #{$font-family-base};
+
+
+
+
+//-----------------------------------------------------------------------------
+//  $ Media
+//-----------------------------------------------------------------------------
+
+$xs-breakpoint: 480px;
+$sm-breakpoint: 640px;
+$md-breakpoint: 800px;
+$lg-breakpoint: 1024px;
+
+$xs-dn-media: '(max-width: #{$xs-breakpoint})';
+$xs-up-media: '(min-width: #{$xs-breakpoint+1px})';
+$sm-dn-media: '(max-width: #{$sm-breakpoint})';
+$sm-up-media: '(min-width: #{$sm-breakpoint+1px})';
+$md-dn-media: '(max-width: #{$md-breakpoint})';
+$md-up-media: '(min-width: #{$md-breakpoint+1px})';
+$lg-dn-media: '(max-width: #{$lg-breakpoint})';
+$lg-up-media: '(min-width: #{$lg-breakpoint+1px})';
+
+$media-queries: (
+    xs-dn: $xs-dn-media,
+    xs-up: $xs-up-media,
+    xs-sm: '#{$xs-up-media} and #{$sm-dn-media}',
+    xs-md: '#{$xs-up-media} and #{$md-dn-media}',
+    xs-lg: '#{$xs-up-media} and #{$lg-dn-media}',
+
+    sm-dn: $sm-dn-media,
+    sm-up: $sm-up-media,
+    sm-md: '#{$sm-up-media} and #{$md-dn-media}',
+    sm-lg: '#{$sm-up-media} and #{$lg-dn-media}',
+
+    md-dn: $md-dn-media,
+    md-up: $md-up-media,
+    md-lg: '#{$md-up-media} and #{$lg-dn-media}',
+
+    lg-dn: $lg-dn-media,
+    lg-up: $lg-up-media
+);
 
 
 
