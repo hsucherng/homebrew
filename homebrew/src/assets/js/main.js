@@ -1,9 +1,7 @@
-(function($) {
+(function($, window, document, undefined) {
     'use strict';
     
     $(function() {
-    	// Your JavaScript
-
         //@js-partial "partials/_sample.js"
     });
-})(jQuery);
+})(jQuery, this, this.document);
