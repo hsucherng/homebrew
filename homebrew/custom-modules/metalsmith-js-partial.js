@@ -11,7 +11,7 @@
  * The entire partial file's contents will be receive indentation based on the
  * @z-concat line's indentation. To ignore that, add a - infront of the @:
  * 
- *     //@-js-partial "link/from/current/file/folder/file.ext"
+ *     //-@js-partial "link/from/current/file/folder/file.ext"
  * 
  * Simlar to SASS, putting an underscore at the start of the partial file name
  * would remove it from the build output. 
@@ -21,7 +21,7 @@
 var minimatch = require('minimatch');
 
 module.exports = function(options) {
-    var regexp = /^( +)\/\/(-?)@js-partial(.+)$/gm;
+    var regexp = /^( +)?\/\/(-)?@js-partial(.+)$/gm;
 
     return function(files, metalsmith, done) {
         var jsFiles = Object.keys(files).filter(function(filepath) {
@@ -36,6 +36,10 @@ module.exports = function(options) {
 
             file.contents = fileContents.replace(regexp, function(matchStr, indentStr, ignoreIndent, argStr) {
                 var targetFilepath;
+
+                if(typeof indentStr === 'undefined') {
+                    indentStr = '';
+                }
 
                 argStr = argStr.trim();
 
