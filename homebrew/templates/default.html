@@ -1,11 +1,12 @@
 <!DOCTYPE html>
 <html>
     <head>
-        <meta charset="utf-8" />
-        <meta name="viewport" content="width=device-width, initial-scale=1" />
+        <meta charset="utf-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
         <meta name="format-detection" content="telephone=no"> <!-- Disable iOS auto telephone number detection -->
         <title>{% if title %}{{title}} | {% endif %}Website Title</title>
-        <link href="{{rootPath}}assets/css/style.css" rel="stylesheet" type="text/css" />
+        <link href="{{path.css}}style.min.css" rel="stylesheet" type="text/css">
+        {% block styles %}{% endblock %}
     </head>
     <body>
         <header class="site-header">

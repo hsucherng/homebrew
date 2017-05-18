@@ -2,36 +2,46 @@
 var argv = require('./custom-modules/argv.js');
 
 /* Default build settings */
-var host = argv('host') ? argv('host') : 'localhost',
-    port = argv('port') ? argv('port') : '8080';
+var host = argv('host') ? argv('host') : 'localhost';
+var port = argv('port') ? argv('port') : '8080';
 
 /* Metalsmith START */
-var Metalsmith      = require('metalsmith'),
-    autoprefixer    = require('metalsmith-autoprefixer'),
-    cleanCss        = require('metalsmith-clean-css'),
-    copy            = require('metalsmith-copy'),
-    filenames       = require('metalsmith-filenames'),
-    inPlace         = require('metalsmith-in-place'),
-    layouts         = require('metalsmith-layouts'),
-    minimatch       = require('minimatch'),
-    rootPath        = require('metalsmith-rootpath'),
-    sass            = require('metalsmith-sass'),
-    serve           = require('metalsmith-serve'),
-    swig            = require('swig'),
-    uglify          = require('metalsmith-uglify'),
-    watch           = require('metalsmith-watch'),
+var Metalsmith   = require('metalsmith');
+var autoprefixer = require('metalsmith-autoprefixer');
+var cleanCss     = require('metalsmith-clean-css');
+var copy         = require('metalsmith-copy');
+var filenames    = require('metalsmith-filenames'); // Not absolutely necessary, but it's useful metadata, especially for navigation
+var ignore       = require('metalsmith-ignore');
+var inPlace      = require('metalsmith-in-place');
+var layouts      = require('metalsmith-layouts');
+var minimatch    = require('minimatch');
+var nunjucks     = require('nunjucks');
+var sass         = require('metalsmith-sass');
+var serve        = require('metalsmith-serve');
+var uglify       = require('metalsmith-uglify');
+var watch        = require('metalsmith-watch');
 
-    /* Custom modules */
-    jsPartials      = require('./custom-modules/metalsmith-js-partial.js'),
-    run             = require('./custom-modules/metalsmith-run.js'),
-    defaultMeta     = require('./custom-modules/metalsmith-default-meta.js');
+/* Custom modules */
+var jsPartials       = require('./custom-modules/metalsmith-js-partial.js');
+var run              = require('./custom-modules/metalsmith-run.js');
+var defaultMeta      = require('./custom-modules/metalsmith-default-meta.js');
+var defaultMetaProps = require('./default-meta.js');
+
+/* Starting the entire build process */
 
 console.log('Building...');
 
-swig.setDefaults({
-    cache: argv('--dist') ? true : false,
-    loader: swig.loaders.fs(__dirname + '/templates')
-});
+/* Nunjucks configuration */
+
+nunjucks
+    .configure(__dirname + '/templates', {
+        noCache: true
+    })
+    .addFilter('indexOf', function(baseString, comparisonString) {
+        return baseString.indexOf(comparisonString);
+    });
+
+/* Starting Metalsmith */
 
 Metalsmith(__dirname)
     .source('src')
@@ -40,15 +50,17 @@ Metalsmith(__dirname)
     /* CSS */
     .use(sass({
         outputStyle: "expanded",
-        outputDir: "assets/css/"
+        outputDir: function(originalPath) {
+            return originalPath.replace('scss', 'css');
+        }
     }))
     .use(autoprefixer())
-    .use(copy({
-        pattern: 'assets/css/style.css',
+    .use(copy({ // Making a copy...
+        pattern: 'assets/css/**/*.css',
         extension: '.min.css'
     }))
-    .use(cleanCss({
-        files: 'assets/css/style.min.css',
+    .use(cleanCss({ // ... so that we can minify it.
+        files: 'assets/css/**/*.min.css',
         cleanCSS: {
             advanced: false
         }
@@ -58,20 +70,22 @@ Metalsmith(__dirname)
     .use(jsPartials())
     .use(uglify({
         filter: function(filepath) {
-            return minimatch(filepath, '**/js/**/*.js')
+            return minimatch(filepath, '**/*.js')
                 && !minimatch(filepath, '**/*.min.js')
                 && !minimatch(filepath, '**/partials/**/*.js');
         }
     }))
 
     /* HTML */
-    .use(filenames())
-    .use(rootPath())
+    .use(filenames()) // Not absolutely necessary, but it's useful metadata, especially for navigation
+    .use(defaultMeta(defaultMetaProps))
     .use(inPlace({
-        engine: 'swig'
+        engine: 'nunjucks',
+        pattern: '**/*.html'
     }))
     .use(layouts({
-        engine: 'swig'
+        engine: 'nunjucks',
+        pattern: '**/*.html'
     }))
 
     .use(run({
@@ -82,7 +96,7 @@ Metalsmith(__dirname)
                 "${source}/!(assets)/**/*": true,
                 "${source}/assets/!(js|scss)/**/*": true,
                 "${source}/assets/js/**/*.js": "assets/js/**/*.js",
-                "${source}/assets/scss/**/*.scss": "assets/scss/style.scss",
+                "${source}/assets/scss/**/*.scss": "assets/scss/**/*.scss",
                 "templates/**/*": "**/*.html"
             }
         })

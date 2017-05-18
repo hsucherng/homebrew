@@ -6,35 +6,28 @@
 /*---- Imports ----*/
 
 
-@import 'imports/normalize';
-@import 'imports/fonts';
+@import 'partials/imports/normalize';
+@import 'partials/imports/fonts';
 
 
 /*---- Globals ----*/
 
 
-@import 'globals/vars';
-@import 'globals/mixins';
-@import 'globals/starters';
+@import 'partials/globals/vars';
+@import 'partials/globals/functions';
+@import 'partials/globals/mixins';
+@import 'partials/globals/starters';
 
 
 /*---- Components ----*/
 
 
-@import 'components/buttons';
-@import 'components/icons';
-@import 'components/forms';
+@import 'partials/components/buttons';
 
 
 /*---- Main ----*/
 
 
-@import 'main/general';
-@import 'main/header';
-@import 'main/footer';
-
-
-/*---- Priority Components ----*/
-
-
-@import 'components/helpers';
+@import 'partials/main/general';
+@import 'partials/main/header';
+@import 'partials/main/footer';

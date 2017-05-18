@@ -1,0 +1,113 @@
+//-----------------------------------------------------------------------------
+//  General Mixins
+//-----------------------------------------------------------------------------
+
+//
+//  Assuming our variable is as below:
+//
+//      $media-queries: (
+//          xs-dn: '(max-width: 480px)',
+//          md-up: '(min-width: 801px)'
+//      );
+//
+//  We can use the media mixin as below:
+//
+//  CODE:   @include media(xs-dn) { ... }
+//  RESULT: @media (max-width: 480px) { ... }
+//      - `xs-dn` is the key name inside the $media-queries list.
+//
+//  CODE:   @include media(xs-dn, md-up) { ... }
+//  RESULT: @media (max-width: 480px), (min-width: 801px) { ... }
+//      - This is how we can declare multiple media queries for
+//        the same block.
+//
+//  CODE:   @include media(xs-dn, '(max-height: 480px)') { ... }
+//  RESULT: @media (max-width: 480px), (max-height: 480px) { ... }
+//      - While declaring multiple media queries, we can mix in both
+//        preset and custom queries.
+//
+//  CODE:   @include media((xs-dn, 'and (max-height: 480px)')) { ... }
+//  RESULT: @media (max-width: 480px) and (min-width: 801px) { ... }
+//      - By further grouping up the preset and custom queries, we can
+//        combine them into a single breakpoint with multiple conditions.
+//
+@mixin media($breakpoints...) {
+    $query: '';
+
+    @each $breakpoint in $breakpoints {
+        @if $query != '' {
+            $query: $query + ', ';
+        }
+
+        @if type-of($breakpoint) == list {
+            $breakpointString: '';
+
+            @each $portion in $breakpoint {
+                @if $breakpointString != '' {
+                    $breakpointString: $breakpointString + ' ';
+                }
+
+                @if map-has-key($media-queries, $portion) {
+                    $breakpointString: $breakpointString + map-get($media-queries, $portion);
+                } @else {
+                    $breakpointString: $breakpointString + $portion;
+                }
+            }
+
+            $query: $query + $breakpointString;
+        } @else {
+            @if map-has-key($media-queries, $breakpoint) {
+                $query: $query + map-get($media-queries, $breakpoint);
+            } @else {
+                $query: $query + $breakpoint;
+            }
+        }
+    }
+
+    @media #{$query} {
+        @content;
+    }
+}
+
+@mixin placeholders() {
+    /* autoprefixer: off */
+   &::-webkit-input-placeholder { @content; }
+       &::-ms-input-placeholder { @content; }
+        &:-ms-input-placeholder { @content; }
+            &::-moz-placeholder { @content; }
+             &:-moz-placeholder { @content; }
+}
+
+// @mixin hidden-accessible() {
+//     width: 0;
+//     height: 0;
+//     display: block;
+//     position: absolute;
+//     clip: rect(0, 0, 0, 0);
+//     opacity: 0;
+// }
+
+//@mixin clearfix() {
+//    &:after {
+//        content: ' ';
+//        display: table;
+//        clear: both;
+//    }
+//}
+
+//@mixin ellipsis() {
+//    overflow: hidden;
+//    text-overflow: ellipsis;
+//    white-space: nowrap;
+//}
+
+//@mixin justify() {
+//    text-align: justify;
+//
+//    &:after {
+//        content: '';
+//        width: 100%;
+//        height: 0;
+//        display: inline-block;
+//    }
+//}

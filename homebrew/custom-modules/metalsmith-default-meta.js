@@ -28,7 +28,11 @@ module.exports = function(options) {
 
                     for(var i = 0; i < metaKeys.length; i++) {
                         if(typeof file[metaKeys[i]] === 'undefined') {
-                            file[metaKeys[i]] = metaObj[metaKeys[i]];
+                            if(typeof metaObj[metaKeys[i]] === 'function') {
+                                file[metaKeys[i]] = metaObj[metaKeys[i]](keystr, file, files, metalsmith);
+                            } else {
+                                file[metaKeys[i]] = metaObj[metaKeys[i]];
+                            }
                         }
                     }
                 });

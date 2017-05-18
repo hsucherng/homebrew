@@ -3,8 +3,16 @@ title: Home
 ---
 {% extends 'default.html' %}
 
+{% block styles -%}
+        <link href="{{path.css}}page.min.css" rel="stylesheet" type="text/css">
+{%- endblock %}
+
 {% block content -%}
             <div class="wrapper">
                 Main content here.
             </div>
+{%- endblock %}
+
+{% block scripts -%}
+        <script src="{{path.js}}home.min.js"></script>
 {%- endblock %}

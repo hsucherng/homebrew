@@ -1,8 +1,8 @@
 {
   "name": "metalsmith-boilerplate",
-  "version": "0.0.2",
+  "version": "0.0.3",
   "description": "Custom boilerplate",
-  "main": "serve.js",
+  "main": "build.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1"
   },
@@ -15,14 +15,14 @@
     "metalsmith-clean-css": "^3.0.0",
     "metalsmith-copy": "^0.2.1",
     "metalsmith-filenames": "^1.0.0",
+    "metalsmith-ignore": "^0.1.2",
     "metalsmith-in-place": "^1.4.4",
     "metalsmith-layouts": "^1.6.5",
-    "metalsmith-rootpath": "^0.1.7",
     "metalsmith-sass": "^1.3.0",
     "metalsmith-serve": "0.0.7",
     "metalsmith-uglify": "^1.3.0",
     "metalsmith-watch": "^1.0.1",
     "minimatch": "^3.0.0",
-    "swig": "^1.4.2"
+    "nunjucks": "^2.4.2"
   }
 }
