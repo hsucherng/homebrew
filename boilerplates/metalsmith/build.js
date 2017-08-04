@@ -56,11 +56,11 @@ Metalsmith(__dirname)
     }))
     .use(autoprefixer())
     .use(copy({ // Making a copy...
-        pattern: 'assets/css/**/*.css',
+        pattern: '**/*.css',
         extension: '.min.css'
     }))
     .use(cleanCss({ // ... so that we can minify it.
-        files: 'assets/css/**/*.min.css',
+        files: '**/*.min.css',
         cleanCSS: {
             advanced: false
         }
@@ -94,9 +94,9 @@ Metalsmith(__dirname)
             paths: {
                 "${source}/*": true,
                 "${source}/!(assets)/**/*": true,
-                "${source}/assets/!(js|scss)/**/*": true,
-                "${source}/assets/js/**/*.js": "assets/js/**/*.js",
-                "${source}/assets/scss/**/*.scss": "assets/scss/**/*.scss",
+                "${source}/**/assets/!(js|scss)/**/*": true,
+                "${source}/**/assets/js/**/*.js": "**/assets/js/**/*.js",
+                "${source}/**/assets/scss/**/*.scss": "**/assets/scss/**/*.scss",
                 "templates/**/*": "**/*.html"
             }
         })
