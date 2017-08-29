@@ -62,7 +62,7 @@ Metalsmith(__dirname)
     .use(cleanCss({ // ... so that we can minify it.
         files: '**/*.min.css',
         cleanCSS: {
-            advanced: false
+            rebase: false
         }
     }))
 

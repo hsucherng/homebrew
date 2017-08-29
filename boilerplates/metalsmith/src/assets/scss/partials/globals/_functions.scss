@@ -1,8 +1,49 @@
 //-----------------------------------------------------------------------------
-//  General Functions
+//  Functions
 //-----------------------------------------------------------------------------
 
+/*---- Unit setters ----*/
+
 // Attach the `px` unit to a raw number
-// @function px($num) {
-//     @return $num * 1px;
-// }
+@function px($num) {
+    @return $num * 1px;
+}
+
+// Attach the `%` unit to a raw number
+@function perc($num) {
+    @return $num * 1%;
+}
+
+// Attach the `em` unit to a raw number
+@function em($num) {
+    @return $num * 1em;
+}
+
+/*---- Map-list getters ----*/
+
+// Color getter
+@function c($color) {
+    @if map-has-key($colors, $color) {
+        @return map-get($colors, $color);
+    } @else {
+        @error 'No such color `#{$color}` in the $colors list.';
+    }
+}
+
+// Font family getter
+@function ff($font-family) {
+    @if map-has-key($font-families, $font-family) {
+        @return map-get($font-families, $font-family);
+    } @else {
+        @error 'No such font-family `#{$font-family}` in the $font-families list.';
+    }
+}
+
+// Easings getter
+@function easing($easing) {
+    @if map-has-key($easings, $easing) {
+        @return map-get($easings, $easing);
+    } @else {
+        @error 'No such font-family `#{$easing}` in the $easings list.';
+    }
+}

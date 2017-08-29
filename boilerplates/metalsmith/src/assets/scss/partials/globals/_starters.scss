@@ -1,5 +1,5 @@
 /*-----------------------------------------------------------------------------
-    Starters
+    $ Starters
 /*-----------------------------------------------------------------------------
     Just some simple standardisation.
 -----------------------------------------------------------------------------*/
@@ -12,8 +12,8 @@
 }
 
 html {
-    background-color: #f0f0f0;
-    color: #333;
+    background-color: c(dark-white);
+    color: c(black);
 }
 
 body {
@@ -25,7 +25,7 @@ button,
 input,
 select,
 textarea {
-    font: 100%/1.2 $font-family-base;
+    font: 100%/1.2 ff(base);
 }
 
 h1,
@@ -46,7 +46,7 @@ h3,
 h4,
 h5,
 h6 {
-    font: 300 1.25em/1.1 $font-family-alpha;
+    font: 300 1.25em/1.1 ff(alpha);
 }
 
 a,

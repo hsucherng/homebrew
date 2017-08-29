@@ -1,0 +1,382 @@
+/*-----------------------------------------------------------------------------
+    $ Utilities
+-----------------------------------------------------------------------------*/
+
+@mixin generate-utilities(
+    $media: false,
+
+    $background-color: true,
+    $border-color: true,
+    $bottom: true,
+    $bottom-negative: true,
+    $color: true,
+    $clear: true,
+    $clearfix: true,
+    $display: true,
+    $font-family: true,
+    $font-size: true,
+    $font-size-em: true,
+    $font-style: true,
+    $font-weight: true,
+    $float: true,
+    $grid: true,
+    $left: true,
+    $left-negative: true,
+    $margin: true,
+    $margin-negative: true,
+    $margin-width: true,
+    $margin-width-negative: true,
+    $padding: true,
+    $position: true,
+    $right: true,
+    $right-negative: true,
+    $text-align: true,
+    $text-decoration: true,
+    $top: true,
+    $top-negative: true,
+    $vertical-align: true,
+    $whitespace: true,
+    $width: true
+) {
+    $query: '';
+
+    @if $media != false {
+        $query: '\\@#{$media}';
+    }
+
+    //---- Background Color ----//
+
+    @if $background-color == true {
+        @if $media == false {
+            @each $name, $hex in $colors {
+                .bgc\:#{$name} { background-color: $hex; }
+            }
+        }
+    }
+
+    //---- Border Color ----//
+
+    @if $border-color == true {
+        @if $media == false {
+            @each $name, $hex in $colors {
+                .bdc\:#{$name} { border-color: $hex; }
+            }
+        }
+    }
+
+    //---- Bottom  ----//
+
+    @if $bottom == true {
+        @each $size, $amount in $widths {
+            .b\:#{$size}#{$query} { bottom: perc($amount); }
+        }
+    }
+
+    //---- Bottom Negative  ----//
+
+    @if $bottom-negative == true {
+        @each $size, $amount in $widths {
+            .b\:-#{$size}#{$query} { bottom: perc(-$amount); }
+        }
+    }
+
+    //---- Color ----//
+
+    @if $color == true {
+        @if $media == false {
+            @each $name, $hex in $colors {
+                .c\:#{$name} { color: $hex; }
+            }
+        }
+    }
+
+    //---- Clear ----//
+
+    @if $clear == true {
+        .cl\:l#{$query} { clear: left;  }
+        .cl\:r#{$query} { clear: right; }
+        .cl\:b#{$query} { clear: both;  }
+    }
+
+    //---- Clearfix ----//
+
+    @if $clearfix == true {
+        @if $media == false {
+            .cf {
+                &:before,
+                &:after {
+                    content: ' ';
+                    display: table;
+                }
+                &:after {
+                    clear: both;
+                }
+            }
+        }
+    }
+
+    //---- Display ----//
+
+    @if $display == true {
+        .d\:i#{$query}  { display: inline;       }
+        .d\:ib#{$query} { display: inline-block; }
+        .d\:b#{$query}  { display: block;        }
+        .d\:t#{$query}  { display: table;        }
+        .d\:tr#{$query} { display: table-row;    }
+        .d\:tc#{$query} { display: table-cell;   }
+        .d\:n#{$query}  { display: none;         }
+    }
+
+    //---- Font Family ----//
+
+    @if $font-family == true {
+        @if $media == false {
+            @each $key, $family in $font-families {
+                .ff\:#{$key} { font-family: $family; }
+            }
+        }
+    }
+
+    //---- Font Size  ----//
+
+    @if $font-size == true {
+        // Absolute font size
+        @each $size, $amount in $font-sizes {
+            .fs\:#{$size}#{$query} { font-size: $amount; }
+        }
+    }
+
+    //---- Font Size Em  ----//
+
+    @if $font-size-em == true {
+        // Relative font size
+        @if $media == false {
+            @each $size, $amount in $font-sizes-em {
+                .fs\:#{$size}#{$query} { font-size: $amount; }
+            }
+        }
+    }
+
+    //---- Font Style  ----//
+
+    @if $font-style == true {
+        @if $media == false {
+            .fs\:i { font-style: italic; }
+            .fs\:n { font-style: normal; }
+        }
+    }
+
+    //---- Font Weight  ----//
+
+    @if $font-weight == true {
+        @if $media == false {
+            @each $weight in $font-weights {
+                .fw\:#{$weight} { font-weight: $weight; }
+            }
+        }
+    }
+
+    //---- Float ----//
+
+    @if $float == true {
+        .fl\:l#{$query} { float: left;  }
+        .fl\:r#{$query} { float: right; }
+        .fl\:n#{$query} { float: none;  }
+    }
+
+    //---- Left  ----//
+
+    @if $left == true {
+        @each $size, $amount in $widths {
+            .l\:#{$size}#{$query} { left: perc($amount); }
+        }
+    }
+
+    //---- Left Negative  ----//
+
+    @if $left-negative == true {
+        @each $size, $amount in $widths {
+            .l\:-#{$size}#{$query} { left: perc(-$amount); }
+        }
+    }
+
+    //---- Margin ----//
+
+    @if $margin == true {
+        @each $size, $amount in $spacings {
+            .m\:#{$size}#{$query}  { margin:        px($amount); }
+            .mx\:#{$size}#{$query},
+            .ml\:#{$size}#{$query} { margin-left:   px($amount); }
+            .mx\:#{$size}#{$query},
+            .mr\:#{$size}#{$query} { margin-right:  px($amount); }
+            .my\:#{$size}#{$query},
+            .mt\:#{$size}#{$query} { margin-top:    px($amount); }
+            .my\:#{$size}#{$query},
+            .mb\:#{$size}#{$query} { margin-bottom: px($amount); }
+        }
+
+        .mx\:a#{$query},
+        .ml\:a#{$query} { margin-left: auto; }
+        .mx\:a#{$query},
+        .mr\:a#{$query} { margin-right: auto; }
+    }
+
+    //---- Margin Negative  ----//
+
+    @if $margin-negative == true {
+        @each $size, $amount in $spacings {
+            .m\:-#{$size}#{$query}  { margin:        px(-$amount); }
+            .mx\:-#{$size}#{$query},
+            .ml\:-#{$size}#{$query} { margin-left:   px(-$amount); }
+            .mx\:-#{$size}#{$query},
+            .mr\:-#{$size}#{$query} { margin-right:  px(-$amount); }
+            .my\:-#{$size}#{$query},
+            .mt\:-#{$size}#{$query} { margin-top:    px(-$amount); }
+            .my\:-#{$size}#{$query},
+            .mb\:-#{$size}#{$query} { margin-bottom: px(-$amount); }
+        }
+    }
+
+    //---- Margin Width ----//
+
+    @if $margin-width == true {
+        @each $size, $amount in $widths {
+            .m\:#{$size}#{$query}  { margin:        perc($amount); }
+            .mx\:#{$size}#{$query},
+            .ml\:#{$size}#{$query} { margin-left:   perc($amount); }
+            .mx\:#{$size}#{$query},
+            .mr\:#{$size}#{$query} { margin-right:  perc($amount); }
+            .my\:#{$size}#{$query},
+            .mt\:#{$size}#{$query} { margin-top:    perc($amount); }
+            .my\:#{$size}#{$query},
+            .mb\:#{$size}#{$query} { margin-bottom: perc($amount); }
+        }
+    }
+
+    //---- Margin Width Negative ----//
+
+    @if $margin-width-negative == true {
+        @each $size, $amount in $widths {
+            .m\:-#{$size}#{$query}  { margin:        perc(-$amount); }
+            .mx\:-#{$size}#{$query},
+            .ml\:-#{$size}#{$query} { margin-left:   perc(-$amount); }
+            .mx\:-#{$size}#{$query},
+            .mr\:-#{$size}#{$query} { margin-right:  perc(-$amount); }
+            .my\:-#{$size}#{$query},
+            .mt\:-#{$size}#{$query} { margin-top:    perc(-$amount); }
+            .my\:-#{$size}#{$query},
+            .mb\:-#{$size}#{$query} { margin-bottom: perc(-$amount); }
+        }
+    }
+
+    //---- Padding  ----//
+
+    @if $padding == true {
+        @each $size, $amount in $spacings {
+            // Padding
+            .p\:#{$size}#{$query}  { padding:        px($amount); }
+            .px\:#{$size}#{$query},
+            .pl\:#{$size}#{$query} { padding-left:   px($amount); }
+            .px\:#{$size}#{$query},
+            .pr\:#{$size}#{$query} { padding-right:  px($amount); }
+            .py\:#{$size}#{$query},
+            .pt\:#{$size}#{$query} { padding-top:    px($amount); }
+            .py\:#{$size}#{$query},
+            .pb\:#{$size}#{$query} { padding-bottom: px($amount); }
+        }
+    }
+
+    //---- Positioning ----//
+
+    @if $position == true {
+        .p\:r#{$query} { position: relative; }
+        .p\:a#{$query} { position: absolute; }
+        .p\:s#{$query} { position: static;   }
+    }
+
+    //---- Right  ----//
+
+    @if $right == true {
+        @each $size, $amount in $widths {
+            .r\:#{$size}#{$query} { right: perc($amount); }
+        }
+    }
+
+    //---- Right Negative  ----//
+
+    @if $right-negative == true {
+        @each $size, $amount in $widths {
+            .r\:-#{$size}#{$query} { right: perc(-$amount); }
+        }
+    }
+
+    //---- Text Align ----//
+
+    @if $text-align == true {
+        // Alignment
+        .ta\:l#{$query} { text-align: left;   }
+        .ta\:r#{$query} { text-align: right;  }
+        .ta\:c#{$query} { text-align: center; }
+    }
+
+    //---- Text Decoration  ----//
+
+    @if $text-decoration == true {
+        @if $media == false {
+            // Decoration
+            .td\:u  { text-decoration: underline;    }
+            .td\:lt { text-decoration: line-through; }
+            .td\:n  { text-decoration: none;         }
+        }
+    }
+
+    //---- Top  ----//
+
+    @if $top == true {
+        @each $size, $amount in $widths {
+            .t\:#{$size}#{$query} { top: perc($amount); }
+        }
+    }
+
+    //---- Top Negative  ----//
+
+    @if $top-negative == true {
+        @each $size, $amount in $widths {
+            .t\:-#{$size}#{$query} { top: perc(-$amount); }
+        }
+    }
+
+    //---- Vertical Alignment ----//
+
+    @if $vertical-align == true {
+        @if $media == false {
+            .va\:t { vertical-align: top; }
+            .va\:m { vertical-align: middle; }
+            .va\:b { vertical-align: bottom; }
+        }
+    }
+
+    //---- Whitespace ----//
+
+    @if $whitespace == true {
+        @if $media == false {
+            .ws\:nw { white-space: nowrap; }
+        }
+    }
+
+    //---- Width ----//
+
+    @if $width == true {
+        @each $size, $amount in $widths {
+            .w\:#{$size}#{$query} { width: perc($amount); }
+        }
+    }
+}
+
+@include generate-utilities($media: false, $utilities...);
+
+@each $medium, $width in $media-sizes {
+    @media (min-width: px($width + 1)) {
+        @include generate-utilities($medium, $utilities...);
+    }
+}

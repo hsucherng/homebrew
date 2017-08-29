@@ -1,71 +1,106 @@
-//-----------------------------------------------------------------------------
-//  General Variables
-//-----------------------------------------------------------------------------
+//=============================================================================
+//  Variables
+//=============================================================================
 //
-//  $ Colors
-//  $ Easings
-//  $ Fonts
-//  $ Media
 //  $ General
+//      $ Easings
+//      $ Transitions
 //
+//  $ Shared
+//      $ Colors
+//      $ Font Families
+//      $ Media
+//
+//  $ Utilities
+//      $ Booleans
+//      $ Fonts
+//      $ Spacings
+//      $ Widths
+//
+//=============================================================================
+
+//=============================================================================
+//  $ General
 //-----------------------------------------------------------------------------
-
-
-
-
-//-----------------------------------------------------------------------------
-//  $ Colors
-//-----------------------------------------------------------------------------
-
-$blue:   #06c;
-$black:  #333;
-
-
-
-
-//-----------------------------------------------------------------------------
-//  $ Easings
+//  These variables are for use directly in other SCSS files, through an
+//  optional convenience mixin/function.
+//=============================================================================
+//  General - $ Easings
 //-----------------------------------------------------------------------------
 //  Easings are from http://easings.net/
+//=============================================================================
+
+$easings: (
+    out-expo: cubic-bezier(0.19, 1, 0.22, 1),
+    out-quart: cubic-bezier(0.165, 0.84, 0.44, 1),
+    out-quad: cubic-bezier(0.25, 0.46, 0.45, 0.94),
+
+    in-quart: cubic-bezier(0.895, 0.03, 0.685, 0.22),
+    in-quad: cubic-bezier(0.55, 0.085, 0.68, 0.53),
+);
+
+//=============================================================================
+//  General - $ Transitions
+//=============================================================================
+
+$transition-duration: 0.4s;
+$transition-easing: easing(out-expo);
+
+//=============================================================================
+//  $ Shared
 //-----------------------------------------------------------------------------
+//  These variables are used for two purposes:
+//      1. Used directly in other SCSS files, through an optional convenience
+//         mixin/function.
+//      2. Used for utility class generation.
+//=============================================================================
+//  Shared - $ Colors
+//=============================================================================
 
-$easeOutExpo:  cubic-bezier(0.19, 1, 0.22, 1);
-$easeOutQuart: cubic-bezier(0.165, 0.84, 0.44, 1);
-$easeOutQuad:  cubic-bezier(0.25, 0.46, 0.45, 0.94);
+$colors: (
+    black: #333,
+        light-black: #999,
+    white: #fff,
+        dark-white: #f2f2f2
+);
 
-$easeInQuart:  cubic-bezier(0.895, 0.03, 0.685, 0.22);
-$easeInQuad:   cubic-bezier(0.55, 0.085, 0.68, 0.53);
+//=============================================================================
+//  Shared - $ Font Families
+//=============================================================================
 
+$font-families: (
+    base: ('Helvetica Neue', 'Helvetica', 'Arial', sans-serif),
+    alpha: ('Georgia', 'Helvetica Neue', 'Helvetica', 'Arial', sans-serif),
+);
 
+//=============================================================================
+//  Shared - $ Media
+//=============================================================================
 
+$media-sizes: (
+    'xs': 480,
+    'sm': 640,
+    'md': 800,
+    'lg': 1024,
+    // 'xl': 1280,
+);
 
-//-----------------------------------------------------------------------------
-//  $ Fonts
-//-----------------------------------------------------------------------------
+$xs-breakpoint: 480;
+$sm-breakpoint: 640;
+$md-breakpoint: 800;
+$lg-breakpoint: 1024;
+// $xl-breakpoint: 1280;
 
-$font-family-base:   'Helvetica Neue', 'Helvetica', 'Arial', sans-serif;
-$font-family-alpha:  'Georgia', #{$font-family-base};
-
-
-
-
-//-----------------------------------------------------------------------------
-//  $ Media
-//-----------------------------------------------------------------------------
-
-$xs-breakpoint: 480px;
-$sm-breakpoint: 640px;
-$md-breakpoint: 800px;
-$lg-breakpoint: 1024px;
-
-$xs-dn-media: '(max-width: #{$xs-breakpoint})';
-$xs-up-media: '(min-width: #{$xs-breakpoint+1px})';
-$sm-dn-media: '(max-width: #{$sm-breakpoint})';
-$sm-up-media: '(min-width: #{$sm-breakpoint+1px})';
-$md-dn-media: '(max-width: #{$md-breakpoint})';
-$md-up-media: '(min-width: #{$md-breakpoint+1px})';
-$lg-dn-media: '(max-width: #{$lg-breakpoint})';
-$lg-up-media: '(min-width: #{$lg-breakpoint+1px})';
+$xs-dn-media: '(max-width: #{px(map-get($media-sizes, 'xs'))})';
+$xs-up-media: '(min-width: #{px(map-get($media-sizes, 'xs')+1)})';
+$sm-dn-media: '(max-width: #{px(map-get($media-sizes, 'sm'))})';
+$sm-up-media: '(min-width: #{px(map-get($media-sizes, 'sm')+1)})';
+$md-dn-media: '(max-width: #{px(map-get($media-sizes, 'md'))})';
+$md-up-media: '(min-width: #{px(map-get($media-sizes, 'md')+1)})';
+$lg-dn-media: '(max-width: #{px(map-get($media-sizes, 'lg'))})';
+$lg-up-media: '(min-width: #{px(map-get($media-sizes, 'lg')+1)})';
+// $xl-dn-media: '(max-width: #{px(map-get($media-sizes, 'xl')})';
+// $xl-up-media: '(min-width: #{px(map-get($media-sizes, 'xl')+1)})';
 
 $media-queries: (
     xs-dn: $xs-dn-media,
@@ -73,26 +108,145 @@ $media-queries: (
     xs-sm: '#{$xs-up-media} and #{$sm-dn-media}',
     xs-md: '#{$xs-up-media} and #{$md-dn-media}',
     xs-lg: '#{$xs-up-media} and #{$lg-dn-media}',
+    // xs-xl: '#{$xs-up-media} and #{$xl-dn-media}',
 
     sm-dn: $sm-dn-media,
     sm-up: $sm-up-media,
     sm-md: '#{$sm-up-media} and #{$md-dn-media}',
     sm-lg: '#{$sm-up-media} and #{$lg-dn-media}',
+    // sm-xl: '#{$sm-up-media} and #{$xl-dn-media}',
 
     md-dn: $md-dn-media,
     md-up: $md-up-media,
     md-lg: '#{$md-up-media} and #{$lg-dn-media}',
+    // md-xl: '#{$md-up-media} and #{$xl-dn-media}',
 
     lg-dn: $lg-dn-media,
-    lg-up: $lg-up-media
+    lg-up: $lg-up-media,
+    // lg-xl: '#{$lg-up-media} and #{$xl-dn-media}',
+
+    // xl-dn: $xl-dn-media,
+    // xl-up: $xl-up-media,
 );
 
 
-
-
+//=============================================================================
+//  $ Utilities
 //-----------------------------------------------------------------------------
-//  $ General
-//-----------------------------------------------------------------------------
+//  These variables are used for utility class generation.
+//=============================================================================
+//  Utilities - $ Booleans
+//=============================================================================
 
-$transition-duration: 0.4s;
-$transition-easing: $easeOutExpo;
+$utilities: (
+    'background-color': false,
+    'border-color': false,
+    'bottom': false,
+    'bottom-negative': false,
+    'color': false,
+    'clear': false,
+    'clearfix': false,
+    'display': false,
+    'font-family': false,
+    'font-size': false,
+    'font-size-em': false,
+    'font-style': false,
+    'font-weight': false,
+    'float': false,
+    'grid': false,
+    'left': false,
+    'left-negative': false,
+    'margin': false,
+    'margin-negative': false,
+    'margin-width': false,
+    'margin-width-negative': false,
+    'padding': false,
+    'position': false,
+    'right': false,
+    'right-negative': false,
+    'text-align': false,
+    'text-decoration': false,
+    'top': false,
+    'top-negative': false,
+    'vertical-align': false,
+    'whitespace': false,
+    'width': false,
+);
+
+//=============================================================================
+//  Utilities - $ Fonts
+//=============================================================================
+
+$font-sizes: (
+    '\\.7':  10px,
+    '\\.8':  12px,
+    '\\.9':  14px,
+    '1':     16px,
+    '2':     20px,
+    '3':     24px,
+    '4':     28px,
+    '5':     32px,
+    '6':     36px,
+    '7':     40px,
+    '8':     44px,
+    '9':     48px,
+    '10':    52px
+);
+
+$font-sizes-em: (
+    '\\.8em': 0.8em,
+    '\\.9em': 0.9em,
+    '1em': 1em,
+    '1\\.25em': 1.25em,
+    '1\\.5em': 1.5em,
+    '1\\.75em': 1.75em,
+    '2em': 2em,
+);
+
+$font-weights: (
+    100,
+    200,
+    300,
+    400,
+    500,
+    600,
+    700,
+    800,
+    900,
+);
+
+
+//=============================================================================
+//  Utilities - $ Spacings
+//=============================================================================
+
+$spacings: (
+    '0':      0,
+    '\\.8':   5,
+    '\\.9':  10,
+    '1':     15,
+    '2':     30,
+    '3':     45,
+    '4':     60,
+    '5':     75,
+    '6':     90
+);
+
+//=============================================================================
+//  Utilities - $ Widths
+//=============================================================================
+
+$widths: (
+    '1of12':  (100 / 12 * 1),
+    '2of12':  (100 / 12 * 2),
+    '3of12':  (100 / 12 * 3),
+    '4of12':  (100 / 12 * 4),
+    '5of12':  (100 / 12 * 5),
+    '6of12':  (100 / 12 * 6),
+    '7of12':  (100 / 12 * 7),
+    '8of12':  (100 / 12 * 8),
+    '9of12':  (100 / 12 * 9),
+    '10of12': (100 / 12 * 10),
+    '11of12': (100 / 12 * 11),
+    '12of12': (100 / 12 * 12),
+);
