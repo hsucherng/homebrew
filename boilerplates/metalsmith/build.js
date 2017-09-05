@@ -26,6 +26,7 @@ var jsPartials       = require('./custom-modules/metalsmith-js-partial.js');
 var run              = require('./custom-modules/metalsmith-run.js');
 var defaultMeta      = require('./custom-modules/metalsmith-default-meta.js');
 var defaultMetaProps = require('./default-meta.js');
+var watchPaths       = require('./watch-paths.js');
 
 /* Starting the entire build process */
 
@@ -91,14 +92,7 @@ Metalsmith(__dirname)
     .use(run({
         unless: '--dist',
         callback: watch({
-            paths: {
-                "${source}/*": true,
-                "${source}/!(assets)/**/*": true,
-                "${source}/**/assets/!(js|scss)/**/*": true,
-                "${source}/**/assets/js/**/*.js": "**/assets/js/**/*.js",
-                "${source}/**/assets/scss/**/*.scss": "**/assets/scss/**/*.scss",
-                "templates/**/*": "**/*.html"
-            }
+            paths: watchPaths
         })
     }))
     .use(run({
