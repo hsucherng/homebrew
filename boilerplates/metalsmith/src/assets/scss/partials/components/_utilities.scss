@@ -3,40 +3,41 @@
 -----------------------------------------------------------------------------*/
 
 @mixin generate-utilities(
-    $media: false,
+    // Enable them by setting the boolean to `true`.
+    $background-color: false,
+    $border-color: false,
+    $bottom: false,
+    $bottom-negative: false,
+    $color: false,
+    $clear: false,
+    $clearfix: false,
+    $display: false,
+    $font-family: false,
+    $font-size: false,
+    $font-size-em: false,
+    $font-style: false,
+    $font-weight: false,
+    $float: false,
+    $left: false,
+    $left-negative: false,
+    $margin: false,
+    $margin-negative: false,
+    $margin-width: false,
+    $margin-width-negative: false,
+    $padding: false,
+    $position: false,
+    $right: false,
+    $right-negative: false,
+    $text-align: false,
+    $text-decoration: false,
+    $top: false,
+    $top-negative: false,
+    $vertical-align: false,
+    $whitespace: false,
+    $width: false,
 
-    $background-color: true,
-    $border-color: true,
-    $bottom: true,
-    $bottom-negative: true,
-    $color: true,
-    $clear: true,
-    $clearfix: true,
-    $display: true,
-    $font-family: true,
-    $font-size: true,
-    $font-size-em: true,
-    $font-style: true,
-    $font-weight: true,
-    $float: true,
-    $grid: true,
-    $left: true,
-    $left-negative: true,
-    $margin: true,
-    $margin-negative: true,
-    $margin-width: true,
-    $margin-width-negative: true,
-    $padding: true,
-    $position: true,
-    $right: true,
-    $right-negative: true,
-    $text-align: true,
-    $text-decoration: true,
-    $top: true,
-    $top-negative: true,
-    $vertical-align: true,
-    $whitespace: true,
-    $width: true
+    // Don't touch. This is to be overridden later.
+    $media: false
 ) {
     $query: '';
 
@@ -373,10 +374,10 @@
     }
 }
 
-@include generate-utilities($media: false, $utilities...);
+@include generate-utilities;
 
 @each $medium, $width in $media-sizes {
     @media (min-width: px($width + 1)) {
-        @include generate-utilities($medium, $utilities...);
+        @include generate-utilities($media: $medium);
     }
 }

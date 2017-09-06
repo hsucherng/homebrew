@@ -12,7 +12,6 @@
 //      $ Media
 //
 //  $ Utilities
-//      $ Booleans
 //      $ Fonts
 //      $ Spacings
 //      $ Widths
@@ -121,45 +120,6 @@ $media-queries: ();
 //  $ Utilities
 //-----------------------------------------------------------------------------
 //  These variables are used for utility class generation.
-//=============================================================================
-//  Utilities - $ Booleans
-//=============================================================================
-
-$utilities: (
-    'background-color': false,
-    'border-color': false,
-    'bottom': false,
-    'bottom-negative': false,
-    'color': false,
-    'clear': false,
-    'clearfix': false,
-    'display': false,
-    'font-family': false,
-    'font-size': false,
-    'font-size-em': false,
-    'font-style': false,
-    'font-weight': false,
-    'float': false,
-    'grid': false,
-    'left': false,
-    'left-negative': false,
-    'margin': false,
-    'margin-negative': false,
-    'margin-width': false,
-    'margin-width-negative': false,
-    'padding': false,
-    'position': false,
-    'right': false,
-    'right-negative': false,
-    'text-align': false,
-    'text-decoration': false,
-    'top': false,
-    'top-negative': false,
-    'vertical-align': false,
-    'whitespace': false,
-    'width': false,
-);
-
 //=============================================================================
 //  Utilities - $ Fonts
 //=============================================================================
