@@ -10,13 +10,43 @@
 }
 
 // Attach the `%` unit to a raw number
-@function perc($num) {
-    @return $num * 1%;
+// Alternatively, pass in a second value to be used as the base for calculating the percentage
+@function perc($num, $base: false) {
+    @if $base != false {
+        @return $num / $base * 100%;
+    } @else {
+        @return $num * 1%;
+    }
+}
+
+// Attach the `vw` unit to a raw number
+// Alternatively, pass in a second value to be used as the base for calculating the vw
+@function vw($num, $base: false) {
+    @if $base != false {
+        @return $num / $base * 100vw;
+    } @else {
+        @return $num * 1vw;
+    }
+}
+
+// Attach the `vh` unit to a raw number
+// Alternatively, pass in a second value to be used as the base for calculating the vh
+@function vh($num, $base: false) {
+    @if $base != false {
+        @return $num / $base * 100vh;
+    } @else {
+        @return $num * 1vh;
+    }
 }
 
 // Attach the `em` unit to a raw number
-@function em($num) {
-    @return $num * 1em;
+// Alternatively, pass in a second value to be used as the base for calculating the em
+@function em($num, $base: false) {
+    @if $base != false {
+        @return $num / $base * 1em;
+    } @else {
+        @return $num * 1em;
+    }
 }
 
 /*---- Map-list getters ----*/
@@ -30,12 +60,21 @@
     }
 }
 
-// Font family getter
+// Font-family getter
 @function ff($font-family) {
     @if map-has-key($font-families, $font-family) {
         @return map-get($font-families, $font-family);
     } @else {
         @error 'No such font-family `#{$font-family}` in the $font-families list.';
+    }
+}
+
+// Font-size getter
+@function fs($font-size) {
+    @if map-has-key($font-sizes, $font-size) {
+        @return map-get($font-sizes, $font-size);
+    } @else {
+        @error 'No such font-size `#{$font-size}` in the $font-sizes list.';
     }
 }
 
