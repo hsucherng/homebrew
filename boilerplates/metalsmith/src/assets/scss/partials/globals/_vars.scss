@@ -78,57 +78,44 @@ $font-families: (
 //=============================================================================
 
 $media-sizes: (
-    'xs': 480,
-    'sm': 640,
-    'md': 800,
-    'lg': 1024,
-    // 'xl': 1280,
+    'xs': 480, // Extra small
+    'sm': 640, // Small
+    'md': 800, // Medium
+    'lg': 1024, // Large
+    //'xl': 1280, // Extra large
+    // 'ul': 1540, // Ultra large
+    // 'full': 1920, // Full
 );
 
-$xs-breakpoint: 480;
-$sm-breakpoint: 640;
-$md-breakpoint: 800;
-$lg-breakpoint: 1024;
-// $xl-breakpoint: 1280;
+$media-queries: ();
 
-$xs-dn-media: '(max-width: #{px(map-get($media-sizes, 'xs'))})';
-$xs-up-media: '(min-width: #{px(map-get($media-sizes, 'xs')+1)})';
-$sm-dn-media: '(max-width: #{px(map-get($media-sizes, 'sm'))})';
-$sm-up-media: '(min-width: #{px(map-get($media-sizes, 'sm')+1)})';
-$md-dn-media: '(max-width: #{px(map-get($media-sizes, 'md'))})';
-$md-up-media: '(min-width: #{px(map-get($media-sizes, 'md')+1)})';
-$lg-dn-media: '(max-width: #{px(map-get($media-sizes, 'lg'))})';
-$lg-up-media: '(min-width: #{px(map-get($media-sizes, 'lg')+1)})';
-// $xl-dn-media: '(max-width: #{px(map-get($media-sizes, 'xl')})';
-// $xl-up-media: '(min-width: #{px(map-get($media-sizes, 'xl')+1)})';
+@each $base-size, $base-width in $media-sizes {
+    // Create SIZE-up and SIZE-dn ranges.
+    $media-queries: map-merge(
+        $media-queries,
+        (
+            #{$base-size}-dn: '(max-width: #{px($base-width)})',
+            #{$base-size}-up: '(min-width: #{px($base-width + 1)})'
+        )
+    );
 
-$media-queries: (
-    xs-dn: $xs-dn-media,
-    xs-up: $xs-up-media,
-    xs-sm: '#{$xs-up-media} and #{$sm-dn-media}',
-    xs-md: '#{$xs-up-media} and #{$md-dn-media}',
-    xs-lg: '#{$xs-up-media} and #{$lg-dn-media}',
-    // xs-xl: '#{$xs-up-media} and #{$xl-dn-media}',
+    // Create SIZE1-SIZE2 ranges, where SIZE1 is smaller than SIZE2.
+    @each $other-size, $other-width in $media-sizes {
+        @if $base-size != $other-size {
+            @if $base-width < $other-width {
+                $media-queries: map-merge(
+                    $media-queries,
+                    (
+                        #{$base-size}-#{$other-size}: '(min-width: #{px($base-width + 1)}) and (max-width: #{px($other-width)})'
+                    )
+                );
+            }
+        }
+    }
+}
 
-    sm-dn: $sm-dn-media,
-    sm-up: $sm-up-media,
-    sm-md: '#{$sm-up-media} and #{$md-dn-media}',
-    sm-lg: '#{$sm-up-media} and #{$lg-dn-media}',
-    // sm-xl: '#{$sm-up-media} and #{$xl-dn-media}',
-
-    md-dn: $md-dn-media,
-    md-up: $md-up-media,
-    md-lg: '#{$md-up-media} and #{$lg-dn-media}',
-    // md-xl: '#{$md-up-media} and #{$xl-dn-media}',
-
-    lg-dn: $lg-dn-media,
-    lg-up: $lg-up-media,
-    // lg-xl: '#{$lg-up-media} and #{$xl-dn-media}',
-
-    // xl-dn: $xl-dn-media,
-    // xl-up: $xl-up-media,
-);
-
+// Uncomment the line below to see exactly what ranges are available.
+//@debug map-keys($media-queries);
 
 //=============================================================================
 //  $ Utilities
