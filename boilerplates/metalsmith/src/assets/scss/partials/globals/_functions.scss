@@ -2,7 +2,7 @@
 //  Functions
 //-----------------------------------------------------------------------------
 
-/*---- Unit setters ----*/
+//---- Unit setters ----//
 
 // Attach the `px` unit to a raw number
 @function px($num) {
@@ -49,7 +49,7 @@
     }
 }
 
-/*---- Map-list getters ----*/
+//---- Map-list getters ----//
 
 // Color getter
 @function c($color) {
