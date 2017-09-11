@@ -9,22 +9,46 @@
         {% block styles %}{% endblock %}
     </head>
     <body>
-        <header class="site-header">
+        <h1 class="hidden-accessible">
+            Website Title{% if title %} - {{ title }}{% endif %}
+        </h1>
+
+        <section class="site-header">
+            <h2 class="hidden-accessible">
+                Site Header
+            </h2>
+
             <div class="wrapper">
                 Header here.
+
+                <nav>
+                    <h3 class="hidden-accessible">
+                        Navigation
+                    </h3>
+                </nav>
             </div>
-        </header>
+        </section>
 
         <main class="site-main">
             {% block content %}{% endblock %}
         </main>
 
-        <footer class="site-footer">
+        <section class="site-footer">
+            <h2 class="hidden-accessible">
+                Site Footer
+            </h2>
+
             <div class="wrapper">
                 Footer here.
+
+                <nav>
+                    <h3 class="hidden-accessible">
+                        Navigation
+                    </h3>
+                </nav>
             </div>
-        </footer>
-        
+        </section>
+
         <script src="{{path.js}}externals.min.js"></script>
         <script src="{{path.js}}main.min.js"></script>
         {% block scripts %}{% endblock %}

@@ -2,6 +2,12 @@
     $ Utilities
 -----------------------------------------------------------------------------*/
 
+.hidden-accessible {
+    @include hidden-accessible;
+}
+
+//----//
+
 @mixin generate-utilities(
     // Enable them by setting the boolean to `true`.
     $background-color: false,
