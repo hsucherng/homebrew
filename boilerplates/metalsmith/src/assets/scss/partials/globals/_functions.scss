@@ -86,3 +86,12 @@
         @error 'No such font-family `#{$easing}` in the $easings list.';
     }
 }
+
+// Z-Index getter
+@function zi($z-index) {
+    @if map-has-key($z-indices, $z-index) {
+        @return map-get($z-indices, $z-index);
+    } @else {
+        @error 'No such z-index `#{$z-index}` in the $z-indices list.';
+    }
+}
