@@ -69,15 +69,6 @@
     }
 }
 
-// Font-size getter
-@function fs($font-size) {
-    @if map-has-key($font-sizes, $font-size) {
-        @return map-get($font-sizes, $font-size);
-    } @else {
-        @error 'No such font-size `#{$font-size}` in the $font-sizes list.';
-    }
-}
-
 // Easings getter
 @function easing($easing) {
     @if map-has-key($easings, $easing) {
