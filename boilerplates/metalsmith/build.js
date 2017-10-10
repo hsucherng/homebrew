@@ -7,6 +7,7 @@ var Metalsmith   = require('metalsmith');
 var autoprefixer = require('metalsmith-autoprefixer');
 var cleanCss     = require('metalsmith-clean-css');
 var copy         = require('metalsmith-copy');
+var express      = require('metalsmith-express');
 var filenames    = require('metalsmith-filenames'); // Not absolutely necessary, but it's useful metadata, especially for navigation
 var ignore       = require('metalsmith-ignore');
 var inPlace      = require('metalsmith-in-place');
@@ -84,17 +85,15 @@ Metalsmith(__dirname)
         pattern: '**/*.html'
     }))
 
-    .use(run({
-        unless: '--dist',
-        callback: watch({
-            paths: settings.watchPaths
-        })
+    .use(express({
+        host: (argv('host') ? argv('host') : settings.host),
+        port: (argv('port') ? argv('port') : settings.port)
     }))
     .use(run({
         unless: '--dist',
-        callback: serve({
-            host: argv('host') ? argv('host') : settings.host,
-            port: argv('port') ? argv('port') : settings.port
+        callback: watch({
+            paths: settings.watchPaths,
+            livereload: true
         })
     }))
 
