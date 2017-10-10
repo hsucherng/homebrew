@@ -1,9 +1,6 @@
 /* Initial dependency */
 var argv = require('./custom-modules/argv.js');
-
-/* Default build settings */
-var host = argv('host') ? argv('host') : 'localhost';
-var port = argv('port') ? argv('port') : '8080';
+var settings = require('./settings.js');
 
 /* Metalsmith START */
 var Metalsmith   = require('metalsmith');
@@ -25,8 +22,6 @@ var watch        = require('metalsmith-watch');
 var jsPartials       = require('./custom-modules/metalsmith-js-partial.js');
 var run              = require('./custom-modules/metalsmith-run.js');
 var defaultMeta      = require('./custom-modules/metalsmith-default-meta.js');
-var defaultMetaProps = require('./default-meta.js');
-var watchPaths       = require('./watch-paths.js');
 
 /* Starting the entire build process */
 
@@ -79,7 +74,7 @@ Metalsmith(__dirname)
 
     /* HTML */
     .use(filenames()) // Not absolutely necessary, but it's useful metadata, especially for navigation
-    .use(defaultMeta(defaultMetaProps))
+    .use(defaultMeta(settings.defaultMeta))
     .use(inPlace({
         engine: 'nunjucks',
         pattern: '**/*.html'
@@ -92,14 +87,14 @@ Metalsmith(__dirname)
     .use(run({
         unless: '--dist',
         callback: watch({
-            paths: watchPaths
+            paths: settings.watchPaths
         })
     }))
     .use(run({
         unless: '--dist',
         callback: serve({
-            host: host,
-            port: port
+            host: argv('host') ? argv('host') : settings.host,
+            port: argv('port') ? argv('port') : settings.port
         })
     }))
 
