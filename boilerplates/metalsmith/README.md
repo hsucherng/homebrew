@@ -4,6 +4,7 @@ The [Metalsmith](http://metalsmith.io) boilerplate has been setup with the follo
 
 - Third party plugins:
     - [Autoprefixer](https://github.com/postcss/autoprefixer)
+    - [Express](https://github.com/chiefy/metalsmith-express)
     - [Nunjucks](https://mozilla.github.io/nunjucks/)
     - [SCSS](http://sass-lang.com/)
     - [Uglify](https://github.com/ksmithut/metalsmith-uglify)
@@ -17,10 +18,23 @@ The [Metalsmith](http://metalsmith.io) boilerplate has been setup with the follo
 1. Install [node](http://nodejs.org). Currently tested with v4.4.4.
 2. Make a copy of the *metalsmith* boilerplate folder.
 3. Open up the CLI (command-line interface, e.g. cmd.exe) and `cd` into the fresh copy of the boilerplate folder.
-4. Run `npm install`. This should install all the required dependencies.
-5. Run `node build` to build the site, which should compile into a new *build* folder, and then serve it up on localhost (`http://localhost:8080` by default). Use the `node build --dist` to just build without serving the localhost.
+4. Run `npm install`. This boilerplate has also been setup with Yarn, so if you have that, you can use `yarn install` instead of `npm install`. Either way, this should install all the required dependencies.
+5. Run `node build` to build the site, which should compile into a new *build* folder, and then serve it up on localhost (`http://localhost:8080` by default).
 
-No LiveReload / BrowserSync, so make sure Metalsmith is properly watching & rebuilding the changes before reloading the page.
+## Configurations
+
+Check the files in the `configs` folder for the configurations that affect the build and its output.
+
+### Default Meta
+
+Just a note: metadata set in the page's YAML always take precedence over those set in `configs/default-meta.js`.
+
+## Build arguments and flags
+
+When running the build command, you may use any of the following to tweak the result:
+
+- `host=0.0.0.0` — Adjust the host. Note that this is temporary; if you want a permanent change, tweak the value in `config/express.js` instead.
+- `port=3000` — Adjust the port. Note that this is temporary; if you want a permanent change, tweak the value in `config/express.js` instead.
 
 ## Debugging
 

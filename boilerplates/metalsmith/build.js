@@ -1,6 +1,5 @@
 /* Initial dependency */
 var argv = require('./custom-modules/argv.js');
-var settings = require('./settings.js');
 
 /* Metalsmith START */
 var Metalsmith   = require('metalsmith');
@@ -75,7 +74,7 @@ Metalsmith(__dirname)
 
     /* HTML */
     .use(filenames()) // Not absolutely necessary, but it's useful metadata, especially for navigation
-    .use(defaultMeta(settings.defaultMeta))
+    .use(defaultMeta(require('./configs/default-meta.js')))
     .use(inPlace({
         engine: 'nunjucks',
         pattern: '**/*.html'
@@ -86,22 +85,16 @@ Metalsmith(__dirname)
     }))
 
     .use(express({
-        host: (argv('host') ? argv('host') : settings.host),
-        port: (argv('port') ? argv('port') : settings.port)
+        host: (argv('host') ? argv('host') : require('./configs/express.js').host),
+        port: (argv('port') ? argv('port') : require('./configs/express.js').port)
     }))
     .use(run({
         unless: '--dist',
-        callback: watch({
-            paths: settings.watchPaths,
-            livereload: true
-        })
+        callback: watch(require('./configs/watch.js'))
     }))
 
     /* END! */
     .build(function(err, files) {
-        if(err) {
-            console.log(err);
-        } else {
-            console.log('Build complete!');
-        }
+        var message = err ? err : 'Build complete!';
+        console.log(message);
     });
