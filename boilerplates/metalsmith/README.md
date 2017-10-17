@@ -7,6 +7,7 @@ The [Metalsmith](http://metalsmith.io) boilerplate has been setup with the follo
     - [Express](https://github.com/chiefy/metalsmith-express)
     - [Nunjucks](https://mozilla.github.io/nunjucks/)
     - [SCSS](http://sass-lang.com/)
+    - [Stylelint](https://stylelint.io/)
     - [Uglify](https://github.com/ksmithut/metalsmith-uglify)
 
 - Custom-written functions:
@@ -15,7 +16,7 @@ The [Metalsmith](http://metalsmith.io) boilerplate has been setup with the follo
 
 ## Setup
 
-1. Install [node](http://nodejs.org). Currently tested with v4.4.4.
+1. Install [node](http://nodejs.org). Currently tested with v6.9.3.
 2. Make a copy of the *metalsmith* boilerplate folder.
 3. Open up the CLI (command-line interface, e.g. cmd.exe) and `cd` into the fresh copy of the boilerplate folder.
 4. Run `npm install`. This boilerplate has also been setup with Yarn, so if you have that, you can use `yarn install` instead of `npm install`. Either way, this should install all the required dependencies.

@@ -3,7 +3,6 @@ var argv = require('./custom-modules/argv.js');
 
 /* Metalsmith START */
 var Metalsmith   = require('metalsmith');
-var autoprefixer = require('metalsmith-autoprefixer');
 var cleanCss     = require('metalsmith-clean-css');
 var copy         = require('metalsmith-copy');
 var express      = require('metalsmith-express');
@@ -13,8 +12,9 @@ var inPlace      = require('metalsmith-in-place');
 var layouts      = require('metalsmith-layouts');
 var minimatch    = require('minimatch');
 var nunjucks     = require('nunjucks');
+var postcss      = require('metalsmith-with-postcss');
+var postcssSCSS  = require('postcss-scss');
 var sass         = require('metalsmith-sass');
-var serve        = require('metalsmith-serve');
 var uglify       = require('metalsmith-uglify');
 var watch        = require('metalsmith-watch');
 
@@ -44,13 +44,23 @@ Metalsmith(__dirname)
     .destination('build')
 
     /* CSS */
+    .use(postcss({
+        pattern: ['**/*.scss'],
+        syntax: postcssSCSS,
+        plugins: {
+            "stylelint": {
+                config: require('./configs/stylelint.js')
+            },
+            "autoprefixer": {},
+            "postcss-reporter": {}
+        }
+    }))
     .use(sass({
         outputStyle: "expanded",
         outputDir: function(originalPath) {
             return originalPath.replace('scss', 'css');
         }
     }))
-    .use(autoprefixer())
     .use(copy({ // Making a copy...
         pattern: '**/*.css',
         extension: '.min.css'
