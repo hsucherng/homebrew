@@ -1368,7 +1368,7 @@ lodash@3.x, lodash@^3.10.1:
   version "3.10.1"
   resolved "https://registry.yarnpkg.com/lodash/-/lodash-3.10.1.tgz#5bf45e8e49ba4189e17d482789dfd15bd140b7b6"
 
-lodash@^2.4.1, lodash@~2.4.1:
+lodash@^2.4.1:
   version "2.4.2"
   resolved "https://registry.yarnpkg.com/lodash/-/lodash-2.4.2.tgz#fadd834b9683073da179b3eae6d9c0d15053f73e"
 
@@ -1463,12 +1463,6 @@ metalsmith-express@^0.1.0:
 metalsmith-filenames@^1.0.0:
   version "1.0.0"
   resolved "https://registry.yarnpkg.com/metalsmith-filenames/-/metalsmith-filenames-1.0.0.tgz#df4e69f246b8325bb9189e0273d2ee70899d00de"
-
-metalsmith-ignore@^0.1.2:
-  version "0.1.2"
-  resolved "https://registry.yarnpkg.com/metalsmith-ignore/-/metalsmith-ignore-0.1.2.tgz#6ae6c694ba62a41585e8b481a11e2928c5ac4028"
-  dependencies:
-    multimatch "^0.1.0"
 
 metalsmith-in-place@^1.4.4:
   version "1.4.4"
@@ -1616,7 +1610,7 @@ minimatch@3.0.3:
   dependencies:
     brace-expansion "^1.0.0"
 
-minimatch@^0.2.14, minimatch@~0.2.14:
+minimatch@^0.2.14:
   version "0.2.14"
   resolved "https://registry.yarnpkg.com/minimatch/-/minimatch-0.2.14.tgz#c74e780574f63c6f9a090e90efbe6ef53a6a756a"
   dependencies:
@@ -1650,13 +1644,6 @@ ms@0.6.2:
 ms@2.0.0:
   version "2.0.0"
   resolved "https://registry.yarnpkg.com/ms/-/ms-2.0.0.tgz#5608aeadfc00be6c2901df5f9861788de0d597c8"
-
-multimatch@^0.1.0:
-  version "0.1.0"
-  resolved "https://registry.yarnpkg.com/multimatch/-/multimatch-0.1.0.tgz#099d9f8f8463ac36cfbfa27360bc16cee87ded64"
-  dependencies:
-    lodash "~2.4.1"
-    minimatch "~0.2.14"
 
 multimatch@^2.0.0:
   version "2.1.0"

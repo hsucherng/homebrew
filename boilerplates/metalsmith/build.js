@@ -7,7 +7,6 @@ var cleanCss     = require('metalsmith-clean-css');
 var copy         = require('metalsmith-copy');
 var express      = require('metalsmith-express');
 var filenames    = require('metalsmith-filenames'); // Not absolutely necessary, but it's useful metadata, especially for navigation
-var ignore       = require('metalsmith-ignore');
 var inPlace      = require('metalsmith-in-place');
 var layouts      = require('metalsmith-layouts');
 var minimatch    = require('minimatch');
