@@ -22,6 +22,14 @@ var jsPartials       = require('./custom-modules/metalsmith-js-partial.js');
 var run              = require('./custom-modules/metalsmith-run.js');
 var defaultMeta      = require('./custom-modules/metalsmith-default-meta.js');
 
+/* Configs */
+var configs = {
+        defaultMeta: require('./configs/default-meta.js'),
+        express:     require('./configs/express.js'),
+        stylelint:   require('./configs/stylelint.js'),
+        watch:       require('./configs/watch.js')
+    };
+
 /* Starting the entire build process */
 
 console.log('Building...');
@@ -48,7 +56,7 @@ Metalsmith(__dirname)
         syntax: postcssSCSS,
         plugins: {
             "stylelint": {
-                config: require('./configs/stylelint.js')
+                config: configs.stylelint
             },
             "autoprefixer": {},
             "postcss-reporter": {}
@@ -82,8 +90,8 @@ Metalsmith(__dirname)
     }))
 
     /* HTML */
-    .use(defaultMeta(require('./configs/default-meta.js')))
     .use(filenames())
+    .use(defaultMeta(configs.defaultMeta))
     .use(inPlace({
         engine: 'nunjucks',
         pattern: '**/*.html'
@@ -93,13 +101,10 @@ Metalsmith(__dirname)
         pattern: '**/*.html'
     }))
 
-    .use(express({
-        host: (argv('host') ? argv('host') : require('./configs/express.js').host),
-        port: (argv('port') ? argv('port') : require('./configs/express.js').port)
-    }))
+    .use(express(configs.express))
     .use(run({
         unless: '--dist',
-        callback: watch(require('./configs/watch.js'))
+        callback: watch(configs.watch)
     }))
 
     /* END! */
