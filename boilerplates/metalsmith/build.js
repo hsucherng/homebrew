@@ -26,6 +26,7 @@ var defaultMeta      = require('./custom-modules/metalsmith-default-meta.js');
 var configs = {
         defaultMeta: require('./configs/default-meta.js'),
         express:     require('./configs/express.js'),
+        misc:        require('./configs/misc.js'),
         stylelint:   require('./configs/stylelint.js'),
         watch:       require('./configs/watch.js')
     };
@@ -101,6 +102,19 @@ Metalsmith(__dirname)
         pattern: '**/*.html'
     }))
 
+    /* Virtual folder */
+    .use(function(files, metalsmith, done) {
+        if(configs.misc.virtualFolder) {
+            Object.keys(files).forEach(function(filepath, index) {
+                files[configs.misc.virtualFolder + filepath] = files[filepath];
+                delete files[filepath]
+            });
+        }
+
+        done();
+    })
+
+    /* Watch and serve */
     .use(express(configs.express))
     .use(run({
         unless: '--dist',
