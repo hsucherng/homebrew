@@ -6,6 +6,10 @@
 
 // Attach the `px` unit to a raw number
 @function px($num) {
+    @if $num == 0 {
+        @return $num;
+    }
+
     @return $num * 1px;
 }
 
@@ -14,6 +18,8 @@
 @function perc($num, $base: false) {
     @if $base != false {
         @return $num / $base * 100%;
+    } @else if $num == 0 {
+        @return $num;
     } @else {
         @return $num * 1%;
     }
@@ -24,6 +30,8 @@
 @function vw($num, $base: false) {
     @if $base != false {
         @return $num / $base * 100vw;
+    } @else if $num == 0 {
+        @return $num;
     } @else {
         @return $num * 1vw;
     }
@@ -34,6 +42,8 @@
 @function vh($num, $base: false) {
     @if $base != false {
         @return $num / $base * 100vh;
+    } @else if $num == 0 {
+        @return $num;
     } @else {
         @return $num * 1vh;
     }
@@ -44,6 +54,8 @@
 @function em($num, $base: false) {
     @if $base != false {
         @return $num / $base * 1em;
+    } @else if $num == 0 {
+        @return $num;
     } @else {
         @return $num * 1em;
     }
