@@ -8,7 +8,6 @@ var copy         = require('metalsmith-copy');
 var express      = require('metalsmith-express');
 var filenames    = require('metalsmith-filenames');
 var inPlace      = require('metalsmith-in-place');
-var layouts      = require('metalsmith-layouts');
 var minimatch    = require('minimatch');
 var nunjucks     = require('nunjucks');
 var postcss      = require('metalsmith-with-postcss');
@@ -94,10 +93,6 @@ Metalsmith(__dirname)
     .use(filenames())
     .use(defaultMeta(configs.defaultMeta))
     .use(inPlace({
-        engine: 'nunjucks',
-        pattern: '**/*.html'
-    }))
-    .use(layouts({
         engine: 'nunjucks',
         pattern: '**/*.html'
     }))
