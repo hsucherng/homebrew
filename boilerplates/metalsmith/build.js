@@ -6,7 +6,7 @@ var Metalsmith   = require('metalsmith');
 var cleanCss     = require('metalsmith-clean-css');
 var copy         = require('metalsmith-copy');
 var express      = require('metalsmith-express');
-var filenames    = require('metalsmith-filenames');
+var filenames    = require('metalsmith-filenames'); // Not absolutely necessary, but it's useful metadata, especially for navigation
 var inPlace      = require('metalsmith-in-place');
 var minimatch    = require('minimatch');
 var nunjucks     = require('nunjucks');
@@ -90,7 +90,7 @@ Metalsmith(__dirname)
     }))
 
     /* HTML */
-    .use(filenames())
+    .use(filenames()) // Not absolutely necessary, but it's useful metadata, especially for navigation
     .use(defaultMeta(configs.defaultMeta))
     .use(inPlace({
         engine: 'nunjucks',
