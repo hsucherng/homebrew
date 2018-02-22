@@ -30,17 +30,18 @@ Check the files in the `configs` folder for the configurations that affect the b
 
 Just a note: metadata set in the page's YAML always take precedence over those set in `configs/default-meta.js`.
 
-## Build arguments and flags
+## Debugging notes
 
-When running the build command, you may use any of the following to tweak the result:
+For certain plugins, we can get the build to log information in the console by setting the `DEBUG` environment variable. Currently, in this build, it seems that `metalsmith-in-place` and `metalsmith-copy` have been setup for this behaviour.
 
-- `host=0.0.0.0` — Adjust the host. Note that this is temporary; if you want a permanent change, tweak the value in `config/express.js` instead.
-- `port=3000` — Adjust the port. Note that this is temporary; if you want a permanent change, tweak the value in `config/express.js` instead.
+On Windows, use the `set` command to set a value for the `DEBUG` environment variable. Setting it to `*` would turn on debugging for all configured plugins:
 
-## Debugging
+    set DEBUG=*
 
-Rarely needed, but a more elaborate manner of debugging is accessible through the `DEBUG` environment variable, based on space or comma-delimited names.
+To turn on debugging for only one plugin, set its name as the value:
 
-On Windows, this can be done using the `set` command.
+    set DEBUG=metalsmith-in-place
 
-    set DEBUG=*,-not_this
+To turn off debugging, set the value to nothing:
+
+    set DEBUG=
