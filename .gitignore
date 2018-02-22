@@ -219,7 +219,6 @@ pip-log.txt
 ## Custom
 #############
 
-_site/
-serve/
 build/
 node_modules/
+*.sublime-workspace
