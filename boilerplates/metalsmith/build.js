@@ -1,25 +1,25 @@
 /* Initial dependency */
-var argv = require('./custom-modules/argv.js');
+var argv           = require('./custom-modules/argv.js');
 
 /* Metalsmith START */
-var Metalsmith   = require('metalsmith');
-var cleanCss     = require('metalsmith-clean-css');
-var copy         = require('metalsmith-copy');
-var express      = require('metalsmith-express');
-var filenames    = require('metalsmith-filenames'); // Not absolutely necessary, but it's useful metadata, especially for navigation
-var inPlace      = require('metalsmith-in-place');
-var minimatch    = require('minimatch');
-var nunjucks     = require('nunjucks');
-var postcss      = require('metalsmith-with-postcss');
-var postcssSCSS  = require('postcss-scss');
-var sass         = require('metalsmith-sass');
-var uglify       = require('metalsmith-uglify');
-var watch        = require('metalsmith-watch');
+var Metalsmith     = require('metalsmith');
+var cleanCss       = require('metalsmith-clean-css');
+var copy           = require('metalsmith-copy');
+var express        = require('metalsmith-express');
+var filenames      = require('metalsmith-filenames'); // Not absolutely necessary, but it's useful metadata, especially for navigation
+var inPlace        = require('metalsmith-in-place');
+var minimatch      = require('minimatch');
+var nunjucks       = require('nunjucks');
+var postcss        = require('metalsmith-with-postcss');
+var postcssSCSS    = require('postcss-scss');
+var sass           = require('metalsmith-sass');
+var uglify         = require('metalsmith-uglify');
+var watch          = require('metalsmith-watch');
 
 /* Custom modules */
-var jsPartials       = require('./custom-modules/metalsmith-js-partial.js');
-var run              = require('./custom-modules/metalsmith-run.js');
-var defaultMeta      = require('./custom-modules/metalsmith-default-meta.js');
+var jsPartials     = require('./custom-modules/metalsmith-js-partial.js');
+var run            = require('./custom-modules/metalsmith-run.js');
+var defaultMeta    = require('./custom-modules/metalsmith-default-meta.js');
 
 /* Configs */
 var configs = {
