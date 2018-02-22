@@ -2,45 +2,54 @@
     $ Utilities
 -----------------------------------------------------------------------------*/
 
-.hidden-accessible {
+.ha {
     @include hidden-accessible;
 }
 
 //----//
 
 @mixin generate-utilities(
-    // Enable them by setting the boolean to `true`.
-    $background-color: false,
-    $border-color: false,
-    $bottom: false,
-    $bottom-negative: false,
-    $color: false,
-    $clear: false,
-    $clearfix: false,
-    $display: false,
-    $font-family: false,
-    $font-size: false,
-    $font-size-em: false,
-    $font-style: false,
-    $font-weight: false,
-    $float: false,
-    $left: false,
-    $left-negative: false,
-    $margin: false,
-    $margin-negative: false,
-    $margin-width: false,
-    $margin-width-negative: false,
-    $padding: false,
-    $position: false,
-    $right: false,
-    $right-negative: false,
-    $text-align: false,
-    $text-decoration: false,
-    $top: false,
-    $top-negative: false,
-    $vertical-align: false,
-    $whitespace: false,
-    $width: false,
+    //
+    // Enable them by setting `enable` to `true`.
+    //
+    // Append them with media query keywords by setting `media` to `true`.
+    //
+    $background-color:      (enable: false, media: false),
+    $border-color:          (enable: false, media: false),
+    $bottom:                (enable: false, media: false),
+    $bottom-negative:       (enable: false, media: false),
+    $color:                 (enable: false, media: false),
+    $clear:                 (enable: false, media: false),
+    $cursor:                (enable: false, media: false),
+    $clearfix:              (enable: false, media: false),
+    $display:               (enable: false, media: false),
+    $font-family:           (enable: false, media: false),
+    $font-size:             (enable: false, media: false),
+    $font-size-em:          (enable: false, media: false),
+    $font-style:            (enable: false, media: false),
+    $font-weight:           (enable: false, media: false),
+    $float:                 (enable: false, media: false),
+    $left:                  (enable: false, media: false),
+    $left-negative:         (enable: false, media: false),
+    $margin:                (enable: false, media: false),
+    $margin-auto:           (enable: false, media: false),
+    $margin-negative:       (enable: false, media: false),
+    $margin-width:          (enable: false, media: false),
+    $margin-width-negative: (enable: false, media: false),
+    $overflow:              (enable: false, media: false),
+    $padding:               (enable: false, media: false),
+    $position:              (enable: false, media: false),
+    $right:                 (enable: false, media: false),
+    $right-negative:        (enable: false, media: false),
+    $text-align:            (enable: false, media: false),
+    $text-decoration:       (enable: false, media: false),
+    $text-transform:        (enable: false, media: false),
+    $top:                   (enable: false, media: false),
+    $top-negative:          (enable: false, media: false),
+    $vertical-align:        (enable: false, media: false),
+    $white-space:           (enable: false, media: false),
+    $width:                 (enable: false, media: false),
+    $word-break:            (enable: false, media: false),
 
     // Don't touch. This is to be overridden later.
     $media: false
@@ -53,329 +62,474 @@
 
     //---- Background Color ----//
 
-    @if $background-color == true {
-        @if $media == false {
+    @if map-get($background-color, enable) == true {
+        @if map-get($background-color, media) == true
+        or $media == false {
             @each $name, $hex in $colors {
-                .bgc\:#{$name} { background-color: $hex; }
+                .bgc\:#{$name}#{$query} { background-color: $hex; }
             }
         }
     }
 
     //---- Border Color ----//
 
-    @if $border-color == true {
-        @if $media == false {
+    @if map-get($border-color, enable) == true {
+        @if map-get($border-color, media) == true
+        or $media == false {
             @each $name, $hex in $colors {
-                .bdc\:#{$name} { border-color: $hex; }
+                .bdc\:#{$name}#{$query} { border-color: $hex; }
             }
         }
     }
 
-    //---- Bottom  ----//
+    //---- Bottom ----//
 
-    @if $bottom == true {
-        @each $size, $amount in $widths {
-            .b\:#{$size}#{$query} { bottom: perc($amount); }
+    @if map-get($bottom, enable) == true {
+        @if map-get($bottom, media) == true
+        or $media == false {
+            @each $size, $amount in $widths {
+                .b\:#{$size}#{$query} { bottom: perc($amount); }
+
+                @if map-get($bottom, negative) == true {
+                    .b\:-#{$size}#{$query} { bottom: perc(-$amount); }
+                }
+            }
         }
     }
 
-    //---- Bottom Negative  ----//
+    //---- Bottom - Negative ----//
 
-    @if $bottom-negative == true {
-        @each $size, $amount in $widths {
-            .b\:-#{$size}#{$query} { bottom: perc(-$amount); }
+    @if map-get($bottom-negative, enable) == true {
+        @if map-get($bottom-negative, media) == true
+        or $media == false {
+            @each $size, $amount in $widths {
+                @if $amount != 0 {
+                    .b\:-#{$size}#{$query} { bottom: perc(-$amount); }
+                }
+            }
         }
     }
 
     //---- Color ----//
 
-    @if $color == true {
-        @if $media == false {
+    @if map-get($color, enable) == true {
+        @if map-get($color, media) == true
+        or $media == false {
             @each $name, $hex in $colors {
-                .c\:#{$name} { color: $hex; }
+                .c\:#{$name}#{$query} { color: $hex; }
             }
         }
     }
 
     //---- Clear ----//
 
-    @if $clear == true {
-        .cl\:l#{$query} { clear: left;  }
-        .cl\:r#{$query} { clear: right; }
-        .cl\:b#{$query} { clear: both;  }
+    @if map-get($clear, enable) == true {
+        @if map-get($clear, media) == true
+        or $media == false {
+            .cl\:b#{$query} { clear: both;  }
+            .cl\:l#{$query} { clear: left;  }
+            .cl\:r#{$query} { clear: right; }
+        }
+    }
+
+    //---- Cursor ----//
+
+    @if map-get($cursor, enable) == true {
+        @if map-get($cursor, media) == true
+        or $media == false {
+            .cu\:a#{$query} { cursor: auto;     }
+            .cu\:d#{$query} { cursor: default;  }
+            .cu\:p#{$query} { cursor: pointer;  }
+        }
     }
 
     //---- Clearfix ----//
 
-    @if $clearfix == true {
-        @if $media == false {
-            .cf {
-                &:before,
-                &:after {
-                    content: ' ';
-                    display: table;
-                }
-                &:after {
-                    clear: both;
-                }
+    @if map-get($clearfix, enable) == true {
+        @if map-get($clearfix, media) == true
+        or $media == false {
+            .cf#{$query} {
+                @include clearfix;
             }
         }
     }
 
     //---- Display ----//
 
-    @if $display == true {
-        .d\:i#{$query}  { display: inline;       }
-        .d\:ib#{$query} { display: inline-block; }
-        .d\:b#{$query}  { display: block;        }
-        .d\:t#{$query}  { display: table;        }
-        .d\:tr#{$query} { display: table-row;    }
-        .d\:tc#{$query} { display: table-cell;   }
-        .d\:n#{$query}  { display: none;         }
+    @if map-get($display, enable) == true {
+        @if map-get($display, media) == true
+        or $media == false {
+            .d\:b#{$query}  { display: block;        }
+            .d\:i#{$query}  { display: inline;       }
+            .d\:ib#{$query} { display: inline-block; }
+            .d\:n#{$query}  { display: none;         }
+            .d\:t#{$query}  { display: table;        }
+            .d\:tr#{$query} { display: table-row;    }
+            .d\:tc#{$query} { display: table-cell;   }
+        }
     }
 
     //---- Font Family ----//
 
-    @if $font-family == true {
-        @if $media == false {
+    @if map-get($font-family, enable) == true {
+        @if map-get($font-family, media) == true
+        or $media == false {
             @each $key, $family in $font-families {
-                .ff\:#{$key} { font-family: $family; }
+                .ff\:#{$key}#{$query} { font-family: $family; }
             }
         }
     }
 
-    //---- Font Size  ----//
+    //---- Font Size - Pixels ----//
 
-    @if $font-size == true {
-        // Absolute font size
-        @each $size, $amount in $font-sizes {
-            .fs\:#{$size}#{$query} { font-size: px($amount); }
+    @if map-get($font-size, enable) == true {
+        @if map-get($font-size, media) == true
+        or $media == false {
+            @each $size, $amount in $font-sizes {
+                .fs\:#{$size}#{$query} { font-size: px($amount); }
+            }
         }
     }
 
-    //---- Font Size Em  ----//
+    //---- Font Size - Em ----//
 
-    @if $font-size-em == true {
-        // Relative font size
-        @if $media == false {
+    @if map-get($font-size-em, enable) == true {
+        @if map-get($font-size-em, media) == true
+        or $media == false {
             @each $size, $amount in $font-sizes-em {
                 .fs\:#{$size}#{$query} { font-size: em($amount); }
             }
         }
     }
 
-    //---- Font Style  ----//
+    //---- Font Style ----//
 
-    @if $font-style == true {
-        @if $media == false {
-            .fs\:i { font-style: italic; }
-            .fs\:n { font-style: normal; }
+    @if map-get($font-style, enable) == true {
+        @if map-get($font-style, media) == true
+        or $media == false {
+            .fs\:i#{$query} { font-style: italic; }
+            .fs\:n#{$query} { font-style: normal; }
         }
     }
 
-    //---- Font Weight  ----//
+    //---- Font Weight ----//
 
-    @if $font-weight == true {
-        @if $media == false {
+    @if map-get($font-weight, enable) == true {
+        @if map-get($font-weight, media) == true
+        or $media == false {
             @each $weight in $font-weights {
-                .fw\:#{$weight} { font-weight: $weight; }
+                .fw\:#{$weight}#{$query} { font-weight: $weight; }
             }
         }
     }
 
     //---- Float ----//
 
-    @if $float == true {
-        .fl\:l#{$query} { float: left;  }
-        .fl\:r#{$query} { float: right; }
-        .fl\:n#{$query} { float: none;  }
-    }
-
-    //---- Left  ----//
-
-    @if $left == true {
-        @each $size, $amount in $widths {
-            .l\:#{$size}#{$query} { left: perc($amount); }
+    @if map-get($float, enable) == true {
+        @if map-get($float, media) == true
+        or $media == false {
+            .fl\:l#{$query} { float: left;  }
+            .fl\:n#{$query} { float: none;  }
+            .fl\:r#{$query} { float: right; }
         }
     }
 
-    //---- Left Negative  ----//
+    //---- Left ----//
 
-    @if $left-negative == true {
-        @each $size, $amount in $widths {
-            .l\:-#{$size}#{$query} { left: perc(-$amount); }
+    @if map-get($left, enable) == true {
+        @if map-get($left, media) == true
+        or $media == false {
+            @each $size, $amount in $widths {
+                .l\:#{$size}#{$query} { left: perc($amount); }
+            }
+        }
+    }
+
+    //---- Left - Negative ----//
+
+    @if map-get($left-negative, enable) == true {
+        @if map-get($left-negative, media) == true
+        or $media == false {
+            @each $size, $amount in $widths {
+                @if $amount != 0 {
+                    .l\:-#{$size}#{$query} { left: perc(-$amount); }
+                }
+            }
         }
     }
 
     //---- Margin ----//
 
-    @if $margin == true {
-        @each $size, $amount in $spacings {
-            .m\:#{$size}#{$query}  { margin:        px($amount); }
-            .mx\:#{$size}#{$query},
-            .ml\:#{$size}#{$query} { margin-left:   px($amount); }
-            .mx\:#{$size}#{$query},
-            .mr\:#{$size}#{$query} { margin-right:  px($amount); }
-            .my\:#{$size}#{$query},
-            .mt\:#{$size}#{$query} { margin-top:    px($amount); }
-            .my\:#{$size}#{$query},
-            .mb\:#{$size}#{$query} { margin-bottom: px($amount); }
-        }
+    @if map-get($margin, enable) == true {
+        @if map-get($margin, media) == true
+        or $media == false {
+            @each $size, $amount in $spacings {
+                .m\:#{$size}#{$query}  { margin:        px($amount); }
+                .mx\:#{$size}#{$query},
+                .ml\:#{$size}#{$query} { margin-left:   px($amount); }
+                .mx\:#{$size}#{$query},
+                .mr\:#{$size}#{$query} { margin-right:  px($amount); }
+                .my\:#{$size}#{$query},
+                .mt\:#{$size}#{$query} { margin-top:    px($amount); }
+                .my\:#{$size}#{$query},
+                .mb\:#{$size}#{$query} { margin-bottom: px($amount); }
 
-        .mx\:a#{$query},
-        .ml\:a#{$query} { margin-left: auto; }
-        .mx\:a#{$query},
-        .mr\:a#{$query} { margin-right: auto; }
-    }
-
-    //---- Margin Negative  ----//
-
-    @if $margin-negative == true {
-        @each $size, $amount in $spacings {
-            .m\:-#{$size}#{$query}  { margin:        px(-$amount); }
-            .mx\:-#{$size}#{$query},
-            .ml\:-#{$size}#{$query} { margin-left:   px(-$amount); }
-            .mx\:-#{$size}#{$query},
-            .mr\:-#{$size}#{$query} { margin-right:  px(-$amount); }
-            .my\:-#{$size}#{$query},
-            .mt\:-#{$size}#{$query} { margin-top:    px(-$amount); }
-            .my\:-#{$size}#{$query},
-            .mb\:-#{$size}#{$query} { margin-bottom: px(-$amount); }
+                @if map-get($margin, negative) == true
+                and $amount != 0 {
+                }
+            }
         }
     }
 
-    //---- Margin Width ----//
+    //---- Margin - Auto ----//
 
-    @if $margin-width == true {
-        @each $size, $amount in $widths {
-            .m\:#{$size}#{$query}  { margin:        perc($amount); }
-            .mx\:#{$size}#{$query},
-            .ml\:#{$size}#{$query} { margin-left:   perc($amount); }
-            .mx\:#{$size}#{$query},
-            .mr\:#{$size}#{$query} { margin-right:  perc($amount); }
-            .my\:#{$size}#{$query},
-            .mt\:#{$size}#{$query} { margin-top:    perc($amount); }
-            .my\:#{$size}#{$query},
-            .mb\:#{$size}#{$query} { margin-bottom: perc($amount); }
+    @if map-get($margin-auto, enable) == true {
+        @if map-get($margin-auto, media) == true
+         or $media == false {
+            .mx\:a#{$query},
+            .ml\:a#{$query} { margin-left: auto;  }
+            .mx\:a#{$query},
+            .mr\:a#{$query} { margin-right: auto; }
         }
     }
 
-    //---- Margin Width Negative ----//
+    //---- Margin - Negative ----//
 
-    @if $margin-width-negative == true {
-        @each $size, $amount in $widths {
-            .m\:-#{$size}#{$query}  { margin:        perc(-$amount); }
-            .mx\:-#{$size}#{$query},
-            .ml\:-#{$size}#{$query} { margin-left:   perc(-$amount); }
-            .mx\:-#{$size}#{$query},
-            .mr\:-#{$size}#{$query} { margin-right:  perc(-$amount); }
-            .my\:-#{$size}#{$query},
-            .mt\:-#{$size}#{$query} { margin-top:    perc(-$amount); }
-            .my\:-#{$size}#{$query},
-            .mb\:-#{$size}#{$query} { margin-bottom: perc(-$amount); }
+    @if map-get($margin-negative, enable) == true {
+        @if map-get($margin-negative, media) == true
+        or $media == false {
+            @each $size, $amount in $spacings {
+                @if $amount != 0 {
+                    .m\:-#{$size}#{$query}  { margin:        px(-$amount); }
+                    .mx\:-#{$size}#{$query},
+                    .ml\:-#{$size}#{$query} { margin-left:   px(-$amount); }
+                    .mx\:-#{$size}#{$query},
+                    .mr\:-#{$size}#{$query} { margin-right:  px(-$amount); }
+                    .my\:-#{$size}#{$query},
+                    .mt\:-#{$size}#{$query} { margin-top:    px(-$amount); }
+                    .my\:-#{$size}#{$query},
+                    .mb\:-#{$size}#{$query} { margin-bottom: px(-$amount); }
+                }
+            }
         }
     }
 
-    //---- Padding  ----//
+    //---- Margin - Width ----//
 
-    @if $padding == true {
-        @each $size, $amount in $spacings {
-            // Padding
-            .p\:#{$size}#{$query}  { padding:        px($amount); }
-            .px\:#{$size}#{$query},
-            .pl\:#{$size}#{$query} { padding-left:   px($amount); }
-            .px\:#{$size}#{$query},
-            .pr\:#{$size}#{$query} { padding-right:  px($amount); }
-            .py\:#{$size}#{$query},
-            .pt\:#{$size}#{$query} { padding-top:    px($amount); }
-            .py\:#{$size}#{$query},
-            .pb\:#{$size}#{$query} { padding-bottom: px($amount); }
+    @if map-get($margin-width, enable) == true {
+        @if map-get($margin-width, media) == true
+        or $media == false {
+            @each $size, $amount in $widths {
+                .m\:#{$size}#{$query}  { margin:        px($amount); }
+                .mx\:#{$size}#{$query},
+                .ml\:#{$size}#{$query} { margin-left:   px($amount); }
+                .mx\:#{$size}#{$query},
+                .mr\:#{$size}#{$query} { margin-right:  px($amount); }
+                .my\:#{$size}#{$query},
+                .mt\:#{$size}#{$query} { margin-top:    px($amount); }
+                .my\:#{$size}#{$query},
+                .mb\:#{$size}#{$query} { margin-bottom: px($amount); }
+
+                @if map-get($margin-width, negative) == true
+                and $amount != 0 {
+                }
+            }
         }
     }
 
-    //---- Positioning ----//
+    //---- Margin - Width Negative ----//
 
-    @if $position == true {
-        .p\:r#{$query} { position: relative; }
-        .p\:a#{$query} { position: absolute; }
-        .p\:s#{$query} { position: static;   }
-    }
-
-    //---- Right  ----//
-
-    @if $right == true {
-        @each $size, $amount in $widths {
-            .r\:#{$size}#{$query} { right: perc($amount); }
+    @if map-get($margin-width-negative, enable) == true {
+        @if map-get($margin-width-negative, media) == true
+        or $media == false {
+            @each $size, $amount in $widths {
+                @if $amount != 0 {
+                    .m\:-#{$size}#{$query}  { margin:        px(-$amount); }
+                    .mx\:-#{$size}#{$query},
+                    .ml\:-#{$size}#{$query} { margin-left:   px(-$amount); }
+                    .mx\:-#{$size}#{$query},
+                    .mr\:-#{$size}#{$query} { margin-right:  px(-$amount); }
+                    .my\:-#{$size}#{$query},
+                    .mt\:-#{$size}#{$query} { margin-top:    px(-$amount); }
+                    .my\:-#{$size}#{$query},
+                    .mb\:-#{$size}#{$query} { margin-bottom: px(-$amount); }
+                }
+            }
         }
     }
 
-    //---- Right Negative  ----//
+    //---- Overflow ----//
 
-    @if $right-negative == true {
-        @each $size, $amount in $widths {
-            .r\:-#{$size}#{$query} { right: perc(-$amount); }
+    @if map-get($padding, enable) == true {
+        @if map-get($padding, media) == true
+        or $media == false {
+            .o\:a#{$query} { overflow: auto;    -webkit-overflow-scrolling: touch; }
+            .o\:v#{$query} { overflow: visible; }
+            .o\:h#{$query} { overflow: hidden;  }
+        }
+    }
+
+    //---- Padding ----//
+
+    @if map-get($padding, enable) == true {
+        @if map-get($padding, media) == true
+        or $media == false {
+            @each $size, $amount in $spacings {
+                // Padding
+                .p\:#{$size}#{$query}  { padding:        px($amount); }
+                .px\:#{$size}#{$query},
+                .pl\:#{$size}#{$query} { padding-left:   px($amount); }
+                .px\:#{$size}#{$query},
+                .pr\:#{$size}#{$query} { padding-right:  px($amount); }
+                .py\:#{$size}#{$query},
+                .pt\:#{$size}#{$query} { padding-top:    px($amount); }
+                .py\:#{$size}#{$query},
+                .pb\:#{$size}#{$query} { padding-bottom: px($amount); }
+            }
+        }
+    }
+
+    //---- Position ----//
+
+    @if map-get($position, enable) == true {
+        @if map-get($position, media) == true
+        or $media == false {
+            .p\:a#{$query} { position: absolute; }
+            .p\:r#{$query} { position: relative; }
+            .p\:s#{$query} { position: static;   }
+        }
+    }
+
+    //---- Right ----//
+
+    @if map-get($right, enable) == true {
+        @if map-get($right, media) == true
+        or $media == false {
+            @each $size, $amount in $widths {
+                .r\:#{$size}#{$query} { right: perc($amount); }
+
+                @if map-get($right, negative) == true {
+                    .r\:-#{$size}#{$query} { right: perc(-$amount); }
+                }
+            }
+        }
+    }
+
+    //---- Right - Negative ----//
+
+    @if map-get($right-negative, enable) == true {
+        @if map-get($right-negative, media) == true
+        or $media == false {
+            @each $size, $amount in $widths {
+                @if $amount != 0 {
+                    .r\:-#{$size}#{$query} { right: perc(-$amount); }
+                }
+            }
         }
     }
 
     //---- Text Align ----//
 
-    @if $text-align == true {
-        // Alignment
-        .ta\:l#{$query} { text-align: left;   }
-        .ta\:r#{$query} { text-align: right;  }
-        .ta\:c#{$query} { text-align: center; }
-    }
-
-    //---- Text Decoration  ----//
-
-    @if $text-decoration == true {
-        @if $media == false {
-            // Decoration
-            .td\:u  { text-decoration: underline;    }
-            .td\:lt { text-decoration: line-through; }
-            .td\:n  { text-decoration: none;         }
+    @if map-get($text-align, enable) == true {
+        @if map-get($text-align, media) == true
+        or $media == false {
+            .ta\:c#{$query} { text-align: center; }
+            .ta\:l#{$query} { text-align: left;   }
+            .ta\:r#{$query} { text-align: right;  }
         }
     }
 
-    //---- Top  ----//
+    //---- Text Decoration ----//
 
-    @if $top == true {
-        @each $size, $amount in $widths {
-            .t\:#{$size}#{$query} { top: perc($amount); }
+    @if map-get($text-decoration, enable) == true {
+        @if map-get($text-decoration, media) == true
+        or $media == false {
+            .td\:lt#{$query} { text-decoration: line-through; }
+            .td\:n#{$query}  { text-decoration: none;         }
+            .td\:u#{$query}  { text-decoration: underline;    }
         }
     }
 
-    //---- Top Negative  ----//
+    //---- Text Decoration ----//
 
-    @if $top-negative == true {
-        @each $size, $amount in $widths {
-            .t\:-#{$size}#{$query} { top: perc(-$amount); }
+    @if map-get($text-transform, enable) == true {
+        @if map-get($text-transform, media) == true
+        or $media == false {
+            .tt\:u#{$query} { text-transform: uppercase;  }
+            .tt\:l#{$query} { text-transform: lowercase;  }
+            .tt\:c#{$query} { text-transform: capitalize; }
+            .tt\:n#{$query} { text-transform: normal;     }
         }
     }
 
-    //---- Vertical Alignment ----//
+    //---- Top ----//
 
-    @if $vertical-align == true {
-        @if $media == false {
-            .va\:t { vertical-align: top; }
-            .va\:m { vertical-align: middle; }
-            .va\:b { vertical-align: bottom; }
+    @if map-get($top, enable) == true {
+        @if map-get($top, media) == true
+        or $media == false {
+            @each $size, $amount in $widths {
+                .t\:#{$size}#{$query} { top: perc($amount); }
+
+                @if map-get($top, negative) == true {
+                    .t\:-#{$size}#{$query} { top: perc(-$amount); }
+                }
+            }
         }
     }
 
-    //---- Whitespace ----//
+    //---- Top - Negative ----//
 
-    @if $whitespace == true {
-        @if $media == false {
-            .ws\:nw { white-space: nowrap; }
+    @if map-get($top-negative, enable) == true {
+        @if map-get($top-negative, media) == true
+        or $media == false {
+            @each $size, $amount in $widths {
+                @if $amount != 0 {
+                    .t\:-#{$size}#{$query} { top: perc(-$amount); }
+                }
+            }
+        }
+    }
+
+    //---- Vertical Align ----//
+
+    @if map-get($vertical-align, enable) == true {
+        @if map-get($vertical-align, media) == true
+        or $media == false {
+            .va\:b#{$query} { vertical-align: bottom; }
+            .va\:m#{$query} { vertical-align: middle; }
+            .va\:t#{$query} { vertical-align: top;    }
+        }
+    }
+
+    //---- White Space ----//
+
+    @if map-get($white-space, enable) == true {
+        @if map-get($white-space, media) == true
+        or $media == false {
+            .ws\:nm#{$query} { white-space: normal; }
+            .ws\:nw#{$query} { white-space: nowrap; }
         }
     }
 
     //---- Width ----//
 
-    @if $width == true {
-        @each $size, $amount in $widths {
-            .w\:#{$size}#{$query} { width: perc($amount); }
+    @if map-get($width, enable) == true {
+        @if map-get($width, media) == true
+        or $media == false {
+            @each $size, $amount in $widths {
+                .w\:#{$size}#{$query} { width: perc($amount); }
+            }
+        }
+    }
+
+    //---- Word Break ----//
+
+    @if map-get($word-break, enable) == true {
+        @if map-get($word-break, media) == true
+        or $media == false {
+            .wb\:ba#{$query} { word-break: break-all;  }
+            .wb\:bw#{$query} { word-break: break-word; }
+            .wb\:n#{$query}  { word-break: normal;     }
         }
     }
 }
