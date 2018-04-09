@@ -3,19 +3,19 @@
  *
  * Only applying it to Javascript files, because both Swig and SASS already
  * have ways to import partials.
- *  
+ *
  * In the JavaScript file, use the following line:
  *
  *     //@js-partial "link/from/current/file/folder/file.ext"
- * 
+ *
  * The entire partial file's contents will be receive indentation based on the
  * @z-concat line's indentation. To ignore that, add a - infront of the @:
- * 
+ *
  *     //-@js-partial "link/from/current/file/folder/file.ext"
- * 
+ *
  * Simlar to SASS, putting an underscore at the start of the partial file name
- * would remove it from the build output. 
- * 
+ * would remove it from the build output.
+ *
  * Does NOT support nested concatenation.
  */
 var minimatch = require('minimatch');
