@@ -25,7 +25,7 @@ module.exports = function(options) {
 
     return function(files, metalsmith, done) {
         var jsFiles = Object.keys(files).filter(function(filepath) {
-                return minimatch(filepath, '**/*.js') && !minimatch(filepath, '**/*.min.js');
+                return minimatch(filepath, '**/*.js');
             });
 
         jsFiles.forEach(function(filepath) {
