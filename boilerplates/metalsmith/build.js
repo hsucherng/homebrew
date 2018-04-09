@@ -85,10 +85,8 @@ Metalsmith(__dirname)
     /* JS */
     .use(jsPartials())
     .use(uglify({
-        filter: function(filepath) {
-            return minimatch(filepath, '**/*.js')
-                && !minimatch(filepath, '**/*.min.js')
-                && !minimatch(filepath, '**/partials/**/*.js');
+        uglify: {
+            sourceMap: false
         }
     }))
 
