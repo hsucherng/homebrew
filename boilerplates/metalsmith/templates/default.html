@@ -6,7 +6,6 @@
         <meta name="format-detection" content="telephone=no"> <!-- Disable iOS auto telephone number detection -->
         <title>{% if title %}{{title}} | {% endif %}Website Title</title>
         <link href="{{path.css}}style.css" rel="stylesheet" type="text/css">
-        {% block styles %}{% endblock %}
     </head>
     <body>
         <h1 class="ha">
@@ -51,6 +50,5 @@
 
         <script src="{{path.js}}externals.min.js"></script>
         <script src="{{path.js}}main.min.js"></script>
-        {% block scripts %}{% endblock %}
     </body>
 </html>
