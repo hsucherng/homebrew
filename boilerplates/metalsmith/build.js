@@ -52,21 +52,24 @@ Metalsmith(__dirname)
 
     /* CSS */
     .use(postcss({
+        map: false,
         pattern: ['**/*.scss'],
-        syntax: postcssSCSS,
         plugins: {
             "stylelint": {
                 config: configs.stylelint
             },
             "autoprefixer": {},
             "postcss-reporter": {}
-        }
+        },
+        syntax: postcssSCSS,
     }))
     .use(sass({
         outputStyle: "expanded",
         outputDir: function(originalPath) {
             return originalPath.replace('scss', 'css');
-        }
+        },
+        sourceMap: true,
+        sourceMapContents: true
     }))
     .use(copy({ // Making a copy...
         pattern: '**/*.css',
